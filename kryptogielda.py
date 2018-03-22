@@ -10,6 +10,10 @@ soup = bs.BeautifulSoup(r.text,'lxml')
 #print soup
 
 for rzecz in soup.find_all('tbody'):
-    for rzeczlist in rzecz.find_all('td'):
-        print rzeczlist
+    for rzeczlist in rzecz.find_all('tr'):
+        i=0
+        for kolumny in rzeczlist.find_all('td'):
+            if i == 1 or i == 3:
+                print kolumny.text
+            i += 1
     #print rzecz
