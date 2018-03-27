@@ -13,22 +13,18 @@ x = []
 # xx ={}
 
 
-# noinspection PyBroadException
+list_kursow = []
 try:
     for item in soup.find_all('section', id='withdrawals'):
         for listItem in item.find_all('li'):
             if listItem.string is not None:
                 waluta_cena = re.search(r'([aA-zZ]{3,4}:\s[0-9](\.*[0-9]{0,8}))', str(listItem.text)).string
-                # waluta, cena = waluta_cena.split(':')
+                waluta, cena = waluta_cena.split(':')
                 # xx[waluta] = cena
-                x.append(waluta_cena)
+                list_kursow.append([str(waluta), float(cena)])
 except Exception as e:
     print e.args
     print e.message
     print "blad w parsowaniu: https://bitbay.net/en/fees"
 
-
-for i in x:
-    print i
-
-
+print list_kursow
