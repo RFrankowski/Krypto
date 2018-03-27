@@ -1,10 +1,8 @@
-import urllib
 from exceptions import Exception
 
 import bs4 as bs
 import lxml
 import re
-import numpy as  np
 import requests
 
 r = requests.get("https://exchangebit.info/binance")
@@ -31,4 +29,4 @@ try:
 except Exception as e:
     print e.args
     print e.message
-    print "blad w parsowaniu https://exchangebit.info/binance"
+    print "blad w parsowaniu: https://exchangebit.info/binance"

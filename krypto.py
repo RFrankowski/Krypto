@@ -2,7 +2,7 @@ import urllib
 import bs4 as bs
 import lxml
 import re
-
+from exceptions import Exception
 
 sock = urllib.urlopen("https://bitbay.net/en/fees")
 htmlSource = sock.read()
