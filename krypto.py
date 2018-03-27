@@ -22,8 +22,10 @@ try:
                 # waluta, cena = waluta_cena.split(':')
                 # xx[waluta] = cena
                 x.append(waluta_cena)
-except:
-    print "opss nie znaleziono elemetou 'section' o id= 'withdrawals'"
+except Exception as e:
+    print e.args
+    print e.message
+    print "blad w parsowaniu: https://bitbay.net/en/fees"
 
 
 for i in x:

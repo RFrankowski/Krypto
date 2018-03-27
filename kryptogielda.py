@@ -1,4 +1,6 @@
 import urllib
+from exceptions import Exception
+
 import bs4 as bs
 import lxml
 import re
@@ -6,14 +8,24 @@ import numpy as  np
 import requests
 
 r = requests.get("https://exchangebit.info/binance")
-soup = bs.BeautifulSoup(r.text,'lxml')
-#print soup
+soup = bs.BeautifulSoup(r.text, 'lxml')
+list_kursow = []
+# print soup
+try:
+    for rzecz in soup.find_all('tbody'):
+        for rzeczlist in rzecz.find_all('tr'):
+            i = 0
+            para_waluta_kurs = []
+            for kolumny in rzeczlist.find_all('td'):
+                if i == 1 or i == 3:
+                    # print kolumny.text
+                    para_waluta_kurs.append(str(kolumny.text))
+                i += 1
+            list_kursow.append(para_waluta_kurs)
+    print list_kursow
 
-for rzecz in soup.find_all('tbody'):
-    for rzeczlist in rzecz.find_all('tr'):
-        i=0
-        for kolumny in rzeczlist.find_all('td'):
-            if i == 1 or i == 3:
-                print kolumny.text
-            i += 1
-    #print rzecz
+    # print rzecz
+except Exception as e:
+    print e.args
+    print e.message
+    print "blad w parsowaniu https://exchangebit.info/binance"
