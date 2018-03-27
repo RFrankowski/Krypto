@@ -11,15 +11,18 @@ r = requests.get("https://exchangebit.info/binance")
 soup = bs.BeautifulSoup(r.text, 'lxml')
 list_kursow = []
 # print soup
+
 try:
     for rzecz in soup.find_all('tbody'):
         for rzeczlist in rzecz.find_all('tr'):
             i = 0
             para_waluta_kurs = []
             for kolumny in rzeczlist.find_all('td'):
-                if i == 1 or i == 3:
+                if i == 1:
                     # print kolumny.text
                     para_waluta_kurs.append(str(kolumny.text))
+                if i == 3:
+                    para_waluta_kurs.append(float(kolumny.text))
                 i += 1
             list_kursow.append(para_waluta_kurs)
     print list_kursow
