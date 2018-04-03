@@ -1,7 +1,9 @@
 from exceptions import Exception
-
+from datetime import datetime
+import csv
 import bs4 as bs
 import lxml
+
 import re
 import requests
 
@@ -32,3 +34,10 @@ except Exception as e:
     print "blad w parsowaniu: https://exchangebit.info/binance"
 
 
+
+
+# for waluta_cena in list_kursow:
+with open('binance.csv', 'a') as csv_file:
+    writer = csv.writer(csv_file)
+    for waluta_cena in list_kursow:
+        writer.writerow([waluta_cena[0], waluta_cena[1], datetime.now().strftime("%Y-%m-%d %H:%M:%S")])

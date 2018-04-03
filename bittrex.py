@@ -1,5 +1,6 @@
 from exceptions import Exception
-
+from datetime import datetime
+import csv
 import bs4 as bs
 import lxml
 import re
@@ -30,3 +31,12 @@ except Exception as e:
     print e.args
     print e.message
     print "blad w parsowaniu: https://exchangebit.info/bittrex"
+
+with open('bittrex.csv', 'a') as csv_file:
+    writer = csv.writer(csv_file)
+    for waluta_cena in list_kursow:
+        writer.writerow([waluta_cena[0], waluta_cena[1], datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
+
+
+
+
