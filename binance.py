@@ -30,3 +30,5 @@ except Exception as e:
     print e.args
     print e.message
     print "blad w parsowaniu: https://exchangebit.info/binance"
+
+

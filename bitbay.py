@@ -28,3 +28,5 @@ except Exception as e:
     print "blad w parsowaniu: https://bitbay.net/en/fees"
 
 print list_kursow
+
+

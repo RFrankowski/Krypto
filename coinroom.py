@@ -12,7 +12,6 @@ soup = bs.BeautifulSoup(r.text, 'lxml')
 list_kursow = []
 
 try:
-
     for rzecz in soup.find_all('tbody'):
         for rzeczlist in rzecz.find_all('tr'):
             kolumny = rzeczlist.find_all('td')
@@ -28,3 +27,5 @@ except Exception as e:
     print "blad w parsowaniu: https://coinroom.com/tabela-oplat"
 
 print list_kursow
+
+
