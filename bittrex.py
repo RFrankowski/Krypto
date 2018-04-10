@@ -12,18 +12,18 @@ list_kursow = []
 # print soup
 
 try:
-    for rzecz in soup.find_all('tbody'):
-        for rzeczlist in rzecz.find_all('tr'):
-            i = 0
-            para_waluta_kurs = []
-            for kolumny in rzeczlist.find_all('td'):
-                if i == 1:
-                    # print kolumny.text
-                    para_waluta_kurs.append(str(kolumny.text))
-                if i == 3:
-                    para_waluta_kurs.append(float(kolumny.text))
-                i += 1
-            list_kursow.append(para_waluta_kurs)
+    tbody = soup.find('tbody')
+    for wiersz in tbody.find_all('tr'):
+        i = 0
+        para_waluta_kurs = []
+        for kolumna in wiersz.find_all('td'):
+            if i == 1:
+                # print kolumny.text
+                para_waluta_kurs.append(str(kolumna.text))
+            if i == 3:
+                para_waluta_kurs.append(float(kolumna.text))
+            i += 1
+        list_kursow.append(para_waluta_kurs)
     print list_kursow
 
     # print rzecz
