@@ -61,5 +61,5 @@ def main():
         get_orderbook()
         time.sleep(2)  # na bitbay najlepiej co 1 sekunde
 
-
-main()
+if __name__ == '__main__':
+    main()
