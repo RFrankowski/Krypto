@@ -5,7 +5,7 @@ import time
 from bitbay import get_bitbay_withdrawals
 
 # waluty dostepne na bit bay: pozniez zamienic na zaczyt z api/parsowanie
-waluty_bitbay = ['LTC', 'ETH']
+waluty_bitbay = ['BTC', 'LTC', 'ETH']
 
 
 # get info from public api
@@ -18,36 +18,25 @@ def znajdz_koszt_wycofania(waluta, koszt_wycofania):
             return waluta_koszt[1]
 
 
-def wyswietl_koszt_wycofania_w_pln():
+def zwroc_koszt_wycofania(waluta, waluta2):
+    time.sleep(1)
     koszt_wycofania_bitbay = get_bitbay_withdrawals()
+    response = requests.get("https://bitbay.net/API/Public/" + waluta + waluta2 + "/orderbook.json")
+    data = response.json()
+    # print data
+    bids = data['bids']
+    bid = []
+    for item in bids:
+        bid.append(item)
+    return ('pierwsza: ', waluta, str(bid[0][0]) + " " + waluta2, str(bid[0][1]) + " volum",
+            znajdz_koszt_wycofania(waluta, koszt_wycofania_bitbay) * bid[0][0])
+
+
+def main():
+    # sprawdzenie kosztu wycofrania w zlotowkach
     for waluta in waluty_bitbay:
-        response = requests.get("https://bitbay.net/API/Public/" + waluta + "PLN" + "/orderbook.json")
-
-        data = response.json()
-        # print data
-        bids = data['bids']
-        bid = []
-        for item in bids:
-            bid.append(item)
-        print('pierwsza: ', waluta, str(bid[0][0]) + " PLN", str(bid[0][1]) + " volum",
-              znajdz_koszt_wycofania(waluta, koszt_wycofania_bitbay) * bid[0][0])
-        time.sleep(1)
-
-def wymina_na_inna_walute():
-    koszt_wycofania_bitbay = get_bitbay_withdrawals()
-    for waluta in waluty_bitbay:
-        response = requests.get("https://bitbay.net/API/Public/" + waluta + "BTC" + "/orderbook.json")
-        data = response.json()
-        # print data
-        bids = data['bids']
-        bid = []
-        for item in bids:
-            bid.append(item)
-        print('pierwsza: ', waluta, str(bid[0][0]) + " btc", str(bid[0][1]) + " volum")
-        time.sleep(1)
+        print zwroc_koszt_wycofania(waluta, "PLN")
 
 
-wymina_na_inna_walute()
-
-
-
+if __name__ == '__main__':
+    main()
