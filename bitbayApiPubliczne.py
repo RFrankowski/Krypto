@@ -41,12 +41,14 @@ def main():
     waluty_bitbay = ['LSK', 'LTC', 'ETH']
 
     koszt_wycofania_bitbay = get_bitbay_withdrawals()
-
+    lista_kosztow_wycofania = []
     # sprawdzenie kosztu wycofrania w zlotowkach dla wszystkich walut
     for waluta in waluty_bitbay:
         cena_ilosc = get_orderbook_first_offer(waluta, "PLN", "bids")
         cena = cena_ilosc[0]
-        print waluta + " " + str(calculate_withdrawals(waluta, koszt_wycofania_bitbay, cena)) + "pln"
+        koszt_wycofania = calculate_withdrawals(waluta, koszt_wycofania_bitbay, cena)
+        lista_kosztow_wycofania.append([waluta,koszt_wycofania])
+        # print waluta + " " + str(koszt_wycofania) + "pln"
 
     # przewalutowanie
     for waluta in waluty_bitbay:
