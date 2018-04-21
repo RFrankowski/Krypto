@@ -18,25 +18,25 @@ class poloniex:
         after = before
 
         # Add timestamps if there isnt one but is a datetime
-        if ('return' in after):
-            if (isinstance(after['return'], list)):
+        if 'return' in after:
+            if isinstance(after['return'], list):
                 for x in xrange(0, len(after['return'])):
-                    if (isinstance(after['return'][x], dict)):
-                        if ('datetime' in after['return'][x] and 'timestamp' not in after['return'][x]):
+                    if isinstance(after['return'][x], dict):
+                        if 'datetime' in after['return'][x] and 'timestamp' not in after['return'][x]:
                             after['return'][x]['timestamp'] = float(createTimeStamp(after['return'][x]['datetime']))
 
         return after
 
     def api_query(self, command, req={}):
 
-        if (command == "returnTicker" or command == "return24Volume"):
+        if command == "returnTicker" or command == "return24Volume":
             ret = urllib2.urlopen(urllib2.Request('https://poloniex.com/public?command=' + command))
             return json.loads(ret.read())
-        elif (command == "returnOrderBook"):
+        elif command == "returnOrderBook":
             ret = urllib2.urlopen(urllib2.Request(
                 'https://poloniex.com/public?command=' + command + '&currencyPair=' + str(req['currencyPair'])))
             return json.loads(ret.read())
-        elif (command == "returnMarketTradeHistory"):
+        elif command == "returnMarketTradeHistory":
             ret = urllib2.urlopen(urllib2.Request(
                 'https://poloniex.com/public?command=' + "returnTradeHistory" + '&currencyPair=' + str(
                     req['currencyPair'])))

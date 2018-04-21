@@ -3,7 +3,7 @@
 import requests
 import time
 from bitbay import get_bitbay_withdrawals
-
+from poloniexAPI import *
 
 # ================ bids - oferty kupna asks - oferty sprzedazy ===========================
 # ================ "maker" i "taker"======================================================
@@ -13,10 +13,10 @@ from bitbay import get_bitbay_withdrawals
 
 
 # zwraca koszt wycofania dla danej waluty dla danych pobranych z giedly
-def calculate_withdrawals(waluta, koszt_wycofania, cena_sprzedazy):
+def get_specyfic_withdrawals_fee(waluta, koszt_wycofania):
     for waluta_koszt in koszt_wycofania:
         if waluta_koszt[0] == waluta:
-            return waluta_koszt[1] * cena_sprzedazy
+            return waluta_koszt[1]
 
 
 # funkcja zwraca koszt wycofania w walucie2
@@ -25,41 +25,56 @@ def get_orderbook_first_offer(waluta, waluta2, kupno_sprzedaz):
     response = requests.get("https://bitbay.net/API/Public/" + waluta + waluta2 + "/orderbook.json")
     data = response.json()
     # print data
-    asks = data[kupno_sprzedaz]
+    asks_bids = data[kupno_sprzedaz]
     # ask = []
-    # for item in asks:
+    # for item in asks_bids:
     #     ask.append(item)
     # cena kupna jednej jednoski za walute2
     # cena_kupna = ask[0][0]
     # ilosc_w_ofercie = ask[0][1]
     # zwraca pierwsza oferte sprzedazy
-    return asks[0]
+    return asks_bids[0]
 
 
 def main():
-    # pozniej dodac zaczyt z bitbay
-    waluty_bitbay = ['LSK', 'LTC', 'ETH']
+    lista_kosztow_wycofania_bitbay = get_bitbay_withdrawals()
+    # zalozenie przesylu
+    # zakladam wyslanie z bitbay do poloniex
+    waluta_do_przeslania = "BTC"
+    ilosc_do_przeslania = 0.05  # BTC
+    # sprawdzam koszt wyslania bez przewalutowania
+    print str(get_specyfic_withdrawals_fee(waluta_do_przeslania,
+                                           lista_kosztow_wycofania_bitbay)) + " to jest koszt transfer fee "
 
-    koszt_wycofania_bitbay = get_bitbay_withdrawals()
-    lista_kosztow_wycofania = []
-    # sprawdzenie kosztu wycofrania w zlotowkach dla wszystkich walut
+    print str((ilosc_do_przeslania - get_specyfic_withdrawals_fee(waluta_do_przeslania,
+                                                                  lista_kosztow_wycofania_bitbay)) / ilosc_do_przeslania) + " tyle bedzie po przeslaniu bez przewalutowania"
+
+    # waluty dla ktorych chce sprawdzic
+    waluty_bitbay = ['GAME', 'LSK', 'LTC', 'ETH']
     for waluta in waluty_bitbay:
-        cena_ilosc = get_orderbook_first_offer(waluta, "PLN", "bids")
-        cena = cena_ilosc[0]
-        koszt_wycofania = calculate_withdrawals(waluta, koszt_wycofania_bitbay, cena)
-        lista_kosztow_wycofania.append([waluta,koszt_wycofania])
-        # print waluta + " " + str(koszt_wycofania) + "pln"
+        print "____________Start_ " + waluta + "________________"
 
-    # przewalutowanie
-    for waluta in waluty_bitbay:
-        cena_ilosc = get_orderbook_first_offer(waluta, "BTC", "asks")
-        cena = cena_ilosc[0]
-        print cena_ilosc
+        # wzor na przesyl
+        # (ilosc_do_przeslania - koszt_wycofania) / ilosc_do_przeslania
 
-
-        # sprawdzic opcje przewalutowania i wycofania z danej gieldy
-        # np btc > game sprawdzic koszt (przewalutowania + wycofania)
-        # czynnosc powtorzyc dla wszystkich par
+        # sprawdzenie cen waluty np game za btc na dwoch gieldach
+        # wzor na ilosc Game
+        # (ilosc_do_przeslania / cena_kryptowaluty)
+        print "bitbay "
+        # print str(get_orderbook_first_offer(waluta, waluta_do_przeslania,
+        #                                     "asks")) + "to jest odpowiednio cena " + waluta + " i ilosc w ofercie"
+        ile_game = (ilosc_do_przeslania / get_orderbook_first_offer(waluta, "BTC", "asks")[0])
+        # odejmuje koszt wycofania z bitbay
+        ile_game -= get_specyfic_withdrawals_fee(waluta, lista_kosztow_wycofania_bitbay)
+        print (str(ile_game) + " tyle kupie " + waluta + " na bitbay")
+        # sprawdzam cene GAME na poloniex
+        print "sprawdzam cene " + waluta + " na poloniex"
+        polo = poloniex(ApiKey, secret)
+        polo_cena_ilosc = polo.returnOrderBook(waluta_do_przeslania + "_" + waluta)['bids'][0]
+        print str(polo_cena_ilosc) + "odpowiednio cena i ilosc "
+        print "---------------wynik--------------"
+        print (float(ile_game) * float(polo_cena_ilosc[0])) / ilosc_do_przeslania
+        print "____________koniec_ " + waluta + "_______________"
 
 
 if __name__ == '__main__':

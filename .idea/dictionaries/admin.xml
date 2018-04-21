@@ -8,6 +8,8 @@
       <w>appc</w>
       <w>ardr</w>
       <w>bcpt</w>
+      <w>bedzie</w>
+      <w>bierzesz</w>
       <w>binance</w>
       <w>bitb</w>
       <w>bitbay</w>
@@ -21,35 +23,54 @@
       <w>btcpln</w>
       <w>cann</w>
       <w>cena</w>
+      <w>cene</w>
+      <w>chce</w>
       <w>coval</w>
+      <w>czyli</w>
       <w>czynnosc</w>
       <w>danej</w>
+      <w>daniej</w>
       <w>danych</w>
+      <w>datestr</w>
       <w>dodac</w>
+      <w>dostane</w>
       <w>dostepne</w>
+      <w>dwoch</w>
       <w>ebst</w>
       <w>enrg</w>
       <w>fldc</w>
       <w>funkcja</w>
       <w>gbyte</w>
       <w>giedly</w>
+      <w>gieldach</w>
       <w>gieldy</w>
       <w>golos</w>
       <w>ignis</w>
       <w>ilosc</w>
+      <w>ilosci</w>
       <w>incnt</w>
       <w>infx</w>
+      <w>innej</w>
       <w>iost</w>
+      <w>isnt</w>
+      <w>jakas</w>
       <w>jednej</w>
       <w>jednoski</w>
       <w>klucz</w>
       <w>kolumna</w>
       <w>kolumny</w>
+      <w>koniec</w>
       <w>koszt</w>
+      <w>kosztow</w>
       <w>kosztu</w>
+      <w>kryptowaluty</w>
+      <w>ktorych</w>
+      <w>kupie</w>
       <w>kupna</w>
+      <w>kupno</w>
       <w>kurs</w>
       <w>kursow</w>
+      <w>lista</w>
       <w>listy</w>
       <w>lxml</w>
       <w>mana</w>
@@ -62,9 +83,12 @@
       <w>neos</w>
       <w>ntrn</w>
       <w>nuls</w>
+      <w>odejmuje</w>
+      <w>odpowiednio</w>
       <w>ofercie</w>
       <w>oferta</w>
       <w>oferte</w>
+      <w>oferty</w>
       <w>omni</w>
       <w>opcje</w>
       <w>oplat</w>
@@ -73,12 +97,20 @@
       <w>parsowaniu</w>
       <w>pierwsza</w>
       <w>pivx</w>
+      <w>placisz</w>
       <w>pobranych</w>
       <w>podaj</w>
+      <w>poloniex</w>
       <w>powr</w>
       <w>powtorzyc</w>
+      <w>pozniej</w>
       <w>pozniez</w>
+      <w>procentach</w>
       <w>prywatny</w>
+      <w>przeslania</w>
+      <w>przeslaniu</w>
+      <w>przesyl</w>
+      <w>przesylu</w>
       <w>przewalutowania</w>
       <w>przewalutowanie</w>
       <w>ptoy</w>
@@ -95,6 +127,7 @@
       <w>sngls</w>
       <w>snrg</w>
       <w>sphr</w>
+      <w>sprawdzam</w>
       <w>sprawdzenie</w>
       <w>sprawdzic</w>
       <w>sprts</w>
@@ -102,10 +135,13 @@
       <w>steem</w>
       <w>storj</w>
       <w>strat</w>
+      <w>succes</w>
       <w>synx</w>
       <w>tbody</w>
       <w>trst</w>
       <w>tusd</w>
+      <w>tyle</w>
+      <w>udzial</w>
       <w>usdt</w>
       <w>wabi</w>
       <w>walucie</w>
@@ -119,9 +155,17 @@
       <w>wycofania</w>
       <w>wycofrania</w>
       <w>wyforanie</w>
+      <w>wynik</w>
+      <w>wyrazona</w>
+      <w>wyslania</w>
+      <w>wyslanie</w>
+      <w>wystawiasz</w>
+      <w>wzor</w>
       <w>xaur</w>
       <w>yoyow</w>
       <w>zaczyt</w>
+      <w>zakladam</w>
+      <w>zalozenie</w>
       <w>zamienic</w>
       <w>zlotowkach</w>
       <w>znajdz</w>
