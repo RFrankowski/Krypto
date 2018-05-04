@@ -4,8 +4,8 @@ import requests
 import time
 from bitbay import get_bitbay_withdrawals
 from poloniexAPI import *
+from poloniexWidhdraw import getPoloniexWithdrawFee
 import re
-
 
 # ================ bids - oferty kupna asks - oferty sprzedazy ===========================
 # ================ "maker" i "taker"======================================================
@@ -38,55 +38,103 @@ def get_orderbook_first_offer(waluta, waluta2, kupno_sprzedaz):
     return asks_bids[0]
 
 
-def main():
-    lista_kosztow_wycofania_bitbay = get_bitbay_withdrawals()
-    # zalozenie przesylu
-    # zakladam wyslanie z bitbay do poloniex
-    waluta_do_przeslania = "BTC"
+def wprowadz_ile_chce_przeslac():
     while True:
         ilosc_do_przeslania = raw_input('wprowadz ilosc BTC do przeslania')
         num_format = re.compile("^[0-9](\.*[0-9]{0,8})$")
         isnumber = re.match(num_format, ilosc_do_przeslania)
         if isnumber:
-            ilosc_do_przeslania = float(ilosc_do_przeslania)
-            break
+            return float(ilosc_do_przeslania)
         else:
             print 'wprowadz liczbe a nie string!'
 
 
-    # sprawdzam koszt wyslania bez przewalutowania
-    print str(get_specyfic_withdrawals_fee(waluta_do_przeslania,
-                                           lista_kosztow_wycofania_bitbay)) + " to jest koszt transfer fee "
+def wprowadz_wybierz_gielde_bazowa():
+    while True:
+        gielda = raw_input('wybierz gielde bazowa 1 - bitbay, 2 - poloniex, |3 - coinegg working in progress|')
+        num_format = re.compile("^[0-9]{0,2}$")
+        isnumber = re.match(num_format, gielda)
+        if isnumber:
+            return float(gielda)
+        else:
+            print 'wprowadz liczbe a nie string!'
 
-    print str((ilosc_do_przeslania - get_specyfic_withdrawals_fee(waluta_do_przeslania,
-                                                                  lista_kosztow_wycofania_bitbay)) / ilosc_do_przeslania) + " tyle bedzie po przeslaniu bez przewalutowania"
+
+def wprowadz_wybierz_gielde_docelowa():
+    while True:
+        gielda = raw_input('wybierz gielde docelowa 1 - bitbay, 2 - poloniex, |3 - coinegg working in progress|')
+        num_format = re.compile("^[0-9]{0,2}$")
+        isnumber = re.match(num_format, gielda)
+        if isnumber:
+            return float(gielda)
+        else:
+            print 'wprowadz liczbe a nie string!'
+
+
+def get_orderbook_form_stock(gielda, waluta, waluta_do_przeslania, kupno_sprzedaz):
+    polo = poloniex(ApiKey, secret)
+    # zwraca pierwsza oferte cene i ilosc[0.5687, 13583]
+    if float(gielda) == 1:
+        return get_orderbook_first_offer(waluta, waluta_do_przeslania, kupno_sprzedaz)
+    elif float(gielda) == 2:
+        return polo.returnOrderBook(waluta_do_przeslania + "_" + waluta)[kupno_sprzedaz][0]
+
+
+polo = poloniex(ApiKey, secret)
+
+
+def main():
+    lista_kosztow_wycofania_bitbay = get_bitbay_withdrawals()
+    # zalozenie przesylu
+    # zakladam wyslanie z bitbay do poloniex
+    waluta_do_przeslania = "BTC"
+
+    ilosc_do_przeslania = wprowadz_ile_chce_przeslac()
+
+    gielda_bazowa = wprowadz_wybierz_gielde_bazowa()
+    gielda_docelowa = wprowadz_wybierz_gielde_docelowa()
+
+    withdraw_fee = None
+
+    if float(gielda_bazowa) == 1:
+        withdraw_fee = get_specyfic_withdrawals_fee(waluta_do_przeslania, lista_kosztow_wycofania_bitbay)
+    elif float(gielda_bazowa) == 2:
+        withdraw_fee = getPoloniexWithdrawFee(waluta_do_przeslania)
+
+    # sprawdzam koszt wyslania bez przewalutowania
+    print str(withdraw_fee) + " to jest koszt transfer fee "
+
+    print str(
+        (ilosc_do_przeslania - withdraw_fee) / ilosc_do_przeslania) + " tyle bedzie po przeslaniu bez przewalutowania"
 
     # waluty dla ktorych chce sprawdzic
-    waluty_bitbay = ['GAME', 'LSK', 'LTC', 'ETH']
-    for waluta in waluty_bitbay:
-        print "____________Start_ " + waluta + "________________"
+    waluty_do_sprawdzenia = ['GAME', 'LSK', 'LTC', 'ETH']
+    for waluta in waluty_do_sprawdzenia:
+        print "\n\n\n____________Start_ " + waluta + "________________"
 
         # wzor na przesyl
         # (ilosc_do_przeslania - koszt_wycofania) / ilosc_do_przeslania
-
-        # sprawdzenie cen waluty np game za btc na dwoch gieldach
         # wzor na ilosc Game
         # (ilosc_do_przeslania / cena_kryptowaluty)
-        print "bitbay "
-        # print str(get_orderbook_first_offer(waluta, waluta_do_przeslania,
-        #                                     "asks")) + "to jest odpowiednio cena " + waluta + " i ilosc w ofercie"
-        ile_game = (ilosc_do_przeslania / get_orderbook_first_offer(waluta, "BTC", "asks")[0])
-        # odejmuje koszt wycofania z bitbay
-        ile_game -= get_specyfic_withdrawals_fee(waluta, lista_kosztow_wycofania_bitbay)
-        print (str(ile_game) + " tyle kupie " + waluta + " na bitbay")
-        # sprawdzam cene GAME na poloniex
-        print "sprawdzam cene " + waluta + " na poloniex"
-        polo = poloniex(ApiKey, secret)
-        polo_cena_ilosc = polo.returnOrderBook(waluta_do_przeslania + "_" + waluta)['bids'][0]
-        print str(polo_cena_ilosc) + "odpowiednio cena i ilosc "
+
+        print "gielda Bazowa"
+        print str(get_orderbook_form_stock(gielda_bazowa, waluta, waluta_do_przeslania,
+                                           "asks")) + "to jest odpowiednio cena " + waluta + " i ilosc w ofercie"
+        ile_krypto = (
+            ilosc_do_przeslania / float(
+                get_orderbook_form_stock(gielda_bazowa, waluta, waluta_do_przeslania, "asks")[0]))
+        # odejmuje koszt wycofania z gieldy bazowej
+        ile_krypto -= withdraw_fee
+        print (str(ile_krypto) + " tyle kupie " + waluta + " na bitbay")
+
+
+        print "gielda Docelowa \n sprawdzam cene " + waluta
+        gielda_docelowa_cena_ilosc = get_orderbook_form_stock(gielda_docelowa, waluta, waluta_do_przeslania, 'bids')
+        print str(gielda_docelowa_cena_ilosc) + "odpowiednio cena i ilosc "
         print "---------------wynik--------------"
-        print (float(ile_game) * float(polo_cena_ilosc[0])) / ilosc_do_przeslania
-        print "____________koniec_ " + waluta + "_______________"
+        print (float(ile_krypto) * float(gielda_docelowa_cena_ilosc[0])) / ilosc_do_przeslania
+
+        print "____________koniec_ " + waluta + "_______________\n\n\n"
 
 
 if __name__ == '__main__':
