@@ -4,6 +4,8 @@ import requests
 import time
 from bitbay import get_bitbay_withdrawals
 from poloniexAPI import *
+import re
+
 
 # ================ bids - oferty kupna asks - oferty sprzedazy ===========================
 # ================ "maker" i "taker"======================================================
@@ -40,7 +42,17 @@ def main():
     # zalozenie przesylu
     # zakladam wyslanie z bitbay do poloniex
     waluta_do_przeslania = "BTC"
-    ilosc_do_przeslania = 0.05  # BTC
+    while True:
+        ilosc_do_przeslania = raw_input('wprowadz ilosc BTC do przeslania')
+        num_format = re.compile("^[0-9](\.*[0-9]{0,8})$")
+        isnumber = re.match(num_format, ilosc_do_przeslania)
+        if isnumber:
+            ilosc_do_przeslania = float(ilosc_do_przeslania)
+            break
+        else:
+            print 'wprowadz liczbe a nie string!'
+
+
     # sprawdzam koszt wyslania bez przewalutowania
     print str(get_specyfic_withdrawals_fee(waluta_do_przeslania,
                                            lista_kosztow_wycofania_bitbay)) + " to jest koszt transfer fee "
