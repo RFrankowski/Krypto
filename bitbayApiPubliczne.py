@@ -11,7 +11,6 @@ from poloniexAPI import *
 # ================ wystawiasz czyli maker, bierzesz - taker ==============================
 
 
-
 # zwraca koszt wycofania dla danej waluty dla danych pobranych z giedly
 def get_specyfic_withdrawals_fee(waluta, koszt_wycofania):
     for waluta_koszt in koszt_wycofania:
@@ -61,15 +60,15 @@ def main():
         # wzor na ilosc Game
         # (ilosc_do_przeslania / cena_kryptowaluty)
         print "bitbay "
-        # print str(get_orderbook_first_offer(waluta, waluta_do_przeslania,
-        #                                     "asks")) + "to jest odpowiednio cena " + waluta + " i ilosc w ofercie"
+        print str(get_orderbook_first_offer(waluta, waluta_do_przeslania,
+                                            "asks")) + "to jest odpowiednio cena " + waluta + " i ilosc w ofercie"
         ile_game = (ilosc_do_przeslania / get_orderbook_first_offer(waluta, "BTC", "asks")[0])
         # odejmuje koszt wycofania z bitbay
         ile_game -= get_specyfic_withdrawals_fee(waluta, lista_kosztow_wycofania_bitbay)
         print (str(ile_game) + " tyle kupie " + waluta + " na bitbay")
         # sprawdzam cene GAME na poloniex
         print "sprawdzam cene " + waluta + " na poloniex"
-        polo = poloniex(ApiKey, secret)
+        polo = poloniex(APIKey, Secret)
         polo_cena_ilosc = polo.returnOrderBook(waluta_do_przeslania + "_" + waluta)['bids'][0]
         print str(polo_cena_ilosc) + "odpowiednio cena i ilosc "
         print "---------------wynik--------------"
