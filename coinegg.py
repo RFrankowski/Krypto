@@ -8,5 +8,8 @@ r = requests.get("https://www.coinegg.com/fee.html")
 soup = bs.BeautifulSoup(r.text, 'lxml')
 
 
-for cos in soup.find_all('li'):
-    print (cos.text)
+
+
+
+for ul in soup.find_all('ul', class_='noticeListHeadBody clearfix' ):
+    print(ul.text)
