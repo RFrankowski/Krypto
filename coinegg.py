@@ -7,4 +7,6 @@ import requests
 r = requests.get("https://www.coinegg.com/fee.html")
 soup = bs.BeautifulSoup(r.text, 'lxml')
 
-print r.text
+
+for cos in soup.find_all('li'):
+    print (cos.text)
