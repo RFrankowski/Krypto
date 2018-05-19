@@ -13,7 +13,6 @@ import re
 # ================ wystawiasz czyli maker, bierzesz - taker ==============================
 
 
-
 # zwraca koszt wycofania dla danej waluty dla danych pobranych z giedly
 def get_specyfic_withdrawals_fee(waluta, koszt_wycofania):
     for waluta_koszt in koszt_wycofania:
@@ -72,7 +71,6 @@ def wprowadz_wybierz_gielde_docelowa():
 
 
 def get_orderbook_form_stock(gielda, waluta, waluta_do_przeslania, kupno_sprzedaz):
-    polo = poloniex(ApiKey, secret)
     # zwraca pierwsza oferte cene i ilosc[0.5687, 13583]
     if float(gielda) == 1:
         return get_orderbook_first_offer(waluta, waluta_do_przeslania, kupno_sprzedaz)
@@ -105,7 +103,7 @@ def main():
     print str(withdraw_fee) + " to jest koszt transfer fee "
 
     print str(
-        (ilosc_do_przeslania - withdraw_fee) / ilosc_do_przeslania) + " tyle bedzie po przeslaniu bez przewalutowania"
+        (ilosc_do_przeslania - withdraw_fee) ) + " tyle BTC bedzie po przeslaniu bez przewalutowania"
 
     # waluty dla ktorych chce sprawdzic
     waluty_do_sprawdzenia = ['GAME', 'LSK', 'LTC', 'ETH']
