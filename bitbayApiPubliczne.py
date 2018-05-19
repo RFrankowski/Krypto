@@ -129,6 +129,7 @@ def main():
         print "gielda Docelowa \n sprawdzam cene " + waluta
         gielda_docelowa_cena_ilosc = get_orderbook_form_stock(gielda_docelowa, waluta, waluta_do_przeslania, 'bids')
         print str(gielda_docelowa_cena_ilosc) + "odpowiednio cena i ilosc "
+
         print "---------------wynik--------------"
         print (float(ile_krypto) * float(gielda_docelowa_cena_ilosc[0])) / ilosc_do_przeslania
 

@@ -9,6 +9,7 @@ def createTimeStamp(datestr, format="%Y-%m-%d %H:%M:%S"):
     return time.mktime(time.strptime(datestr, format))
 
 
+
 class poloniex:
     def __init__(self, APIKey, Secret):
         self.APIKey = APIKey
@@ -135,4 +136,4 @@ class poloniex:
     # Outputs:
     # response      Text containing message about the withdrawal
     def withdraw(self, currency, amount, address):
-        return self.api_query('withdraw', {"currency": currency, "amount": amount, "address": address})
+        return self.api_query('withdraw', {"BTC": currency, "1": amount, "BITBAY": address})
