@@ -78,7 +78,7 @@ def get_orderbook_form_stock(gielda, waluta, waluta_do_przeslania, kupno_sprzeda
         return polo.returnOrderBook(waluta_do_przeslania + "_" + waluta)[kupno_sprzedaz][0]
 
 
-polo = poloniex(ApiKey, secret)
+# polo = poloniex(ApiKey, secret)
 
 
 def main():
@@ -111,7 +111,7 @@ def main():
         print "\n\n\n____________Start_ " + waluta + "________________"
 
         # wzor na przesyl
-        # (ilosc_do_przeslania - koszt_wycofania) / ilosc_do_przeslania
+        # ilosc_do_przeslania - koszt_wycofania
         # wzor na ilosc Game
         # (ilosc_do_przeslania / cena_kryptowaluty)
 

@@ -23,6 +23,8 @@
       <w>btcd</w>
       <w>btcp</w>
       <w>btcpln</w>
+      <w>była</w>
+      <w>będę</w>
       <w>cann</w>
       <w>cena</w>
       <w>cene</w>
@@ -56,18 +58,23 @@
       <w>ignis</w>
       <w>ilosc</w>
       <w>ilosci</w>
+      <w>ilości</w>
+      <w>ilość</w>
       <w>incnt</w>
       <w>infx</w>
       <w>innej</w>
+      <w>inputu</w>
       <w>iost</w>
       <w>isnt</w>
       <w>jakas</w>
       <w>jednej</w>
       <w>jednoski</w>
+      <w>kalkulator</w>
       <w>klucz</w>
       <w>kolumna</w>
       <w>kolumny</w>
       <w>koniec</w>
+      <w>korzystna</w>
       <w>koszt</w>
       <w>kosztow</w>
       <w>kosztu</w>
@@ -76,19 +83,25 @@
       <w>kupie</w>
       <w>kupna</w>
       <w>kupno</w>
+      <w>kupowanej</w>
       <w>kurs</w>
       <w>kursow</w>
+      <w>licz</w>
+      <w>liczbę</w>
       <w>lista</w>
+      <w>liste</w>
       <w>listy</w>
       <w>lxml</w>
       <w>mana</w>
       <w>miota</w>
+      <w>najbardziej</w>
       <w>najlepiej</w>
       <w>najtansza</w>
       <w>nano</w>
       <w>ncash</w>
       <w>nebl</w>
       <w>neos</w>
+      <w>nieprawidłowy</w>
       <w>ntrn</w>
       <w>nuls</w>
       <w>odejmuje</w>
@@ -106,6 +119,7 @@
       <w>pierwsza</w>
       <w>pivx</w>
       <w>placisz</w>
+      <w>pobierz</w>
       <w>pobranych</w>
       <w>podaj</w>
       <w>poloniex</w>
@@ -114,20 +128,26 @@
       <w>pozniej</w>
       <w>pozniez</w>
       <w>procentach</w>
+      <w>promt</w>
       <w>prywatny</w>
       <w>przeslac</w>
       <w>przeslania</w>
       <w>przeslaniu</w>
       <w>przesyl</w>
       <w>przesylu</w>
+      <w>przesłania</w>
       <w>przewalutowania</w>
       <w>przewalutowanie</w>
+      <w>przewalutowaniem</w>
+      <w>przewalutowaniu</w>
       <w>ptoy</w>
       <w>publiczny</w>
       <w>qtum</w>
       <w>qwark</w>
+      <w>razie</w>
       <w>rzecz</w>
       <w>rzeczlist</w>
+      <w>równa</w>
       <w>safex</w>
       <w>sbtc</w>
       <w>scrt</w>
@@ -143,10 +163,13 @@
       <w>sprts</w>
       <w>sprzedaz</w>
       <w>sprzedazy</w>
+      <w>srcc</w>
       <w>steem</w>
       <w>storj</w>
       <w>strat</w>
       <w>succes</w>
+      <w>suma</w>
+      <w>sumował</w>
       <w>synx</w>
       <w>tbody</w>
       <w>trst</w>
@@ -155,16 +178,20 @@
       <w>udzial</w>
       <w>usdt</w>
       <w>wabi</w>
+      <w>walidacja</w>
       <w>walucie</w>
       <w>walut</w>
       <w>waluta</w>
       <w>walute</w>
+      <w>walutowa</w>
       <w>waluty</w>
       <w>wiersz</w>
       <w>wprowadz</w>
+      <w>wprowadzona</w>
       <w>wszystkich</w>
       <w>wszystko</w>
       <w>wybierz</w>
+      <w>wyboru</w>
       <w>wycofania</w>
       <w>wycofrania</w>
       <w>wyforanie</w>
@@ -173,6 +200,8 @@
       <w>wyslania</w>
       <w>wyslanie</w>
       <w>wystawiasz</w>
+      <w>wysylka</w>
+      <w>wysylki</w>
       <w>wzor</w>
       <w>xaur</w>
       <w>yoyow</w>
@@ -183,6 +212,7 @@
       <w>zlotowkach</w>
       <w>znajdz</w>
       <w>zwraca</w>
+      <w>zwracam</w>
       <w>zwroc</w>
     </words>
   </dictionary>
