@@ -34,8 +34,8 @@ class Kalkulator:
         self.lista_waluta_withdraws = []
         self.pobierz_liste_walut()
 
-        self.lista_walut_ilosc_po_przewalutowaniu = []
-        self.lista_waluty_juz_po_drugiej_stronie = []
+        self.lista_waluta_ilosc_po_przewalutowaniu_bazowa = []
+        self.lista_uzywa_waluta_ilosc_docelowa = []
         pass
 
     @staticmethod
@@ -61,7 +61,8 @@ class Kalkulator:
                 print 'nieprawidłowy format!'
 
     def pobierz_liste_walut(self):
-        # dla gieldy bazowej zwracam liste [['XVC', 0.01], ['SRCC', 0.01]] kosztow wycofania
+        # dla gieldy bazowej zwracam  self.lista_waluta_withdraws= [['XVC', 0.01], ['SRCC', 0.01]] kosztow wycofania
+        # lista_walut_gielda_bazowa = [['XVC'], ['SRCC']]
         # gielda Bazowa
         # bitbay
         if self.gielda_bazowa == 1:
@@ -129,36 +130,28 @@ class Kalkulator:
         # wzor na przesyl
         # ilosc_do_przeslania - koszt_wycofania
         # wzor na ilosc kupowanej kryptowaluty np game
-        # (ilosc_do_przeslania / cena_kryptowaluty)
-        print self.lista_walut_gielda_docelowa
-        print self.lista_walut_gielda_bazowa
+        # ilosc = (ilosc_do_przeslania / cena_kryptowaluty)
+        # po drugiej stronie  ilosc * bids
 
+        print "pobieranie danych... to może potrwać chwilę"
         for waluta in self.lista_walut_gielda_bazowa:
-            # print waluta
             if waluta in self.lista_walut_gielda_docelowa and waluta != "BTC":
                 ilosc_po_przewalutowaniu = self.ilosc_do_przeslania / self.zwroc_orderbook("BTC", waluta, "asks")
                 ilosc_po_przewalutowaniu -= get_specyfic_withdrawals_fee(waluta, self.lista_waluta_withdraws)
-                self.lista_walut_ilosc_po_przewalutowaniu.append([waluta, ilosc_po_przewalutowaniu])
-                # print ilosc_po_przewalutowaniu
-        for waluta, ilosc in self.lista_walut_ilosc_po_przewalutowaniu:
+                self.lista_waluta_ilosc_po_przewalutowaniu_bazowa.append([waluta, ilosc_po_przewalutowaniu])
 
+        for waluta, ilosc in self.lista_waluta_ilosc_po_przewalutowaniu_bazowa:
             ilosc_btc = ilosc * self.zwroc_orderbook_bids("BTC", waluta)
-            self.lista_waluty_juz_po_drugiej_stronie.append([waluta, ilosc_btc])
+            self.lista_uzywa_waluta_ilosc_docelowa.append([waluta, ilosc_btc])
             pass
 
-        print self.lista_waluty_juz_po_drugiej_stronie
-
+        print self.lista_uzywa_waluta_ilosc_docelowa
 
 
 if __name__ == '__main__':
     ApiKey = "-"
     secret = "-"
 
-    # for i in data:
-    #     print str(i) +"\n"+ str(data[i])
-
-
     k = Kalkulator()
-    # k.licz_wysylka_bez_przewalutowania()
+    k.licz_wysylka_bez_przewalutowania()
     k.licz_z_przewalutowaniem()
-    pass
