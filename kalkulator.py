@@ -66,9 +66,9 @@ class Kalkulator:
         # gielda Bazowa
         # bitbay
         if self.gielda_bazowa == 1:
-            self.lista_waluta_withdraws = get_bitbay_withdrawals()
-            # dla gieldy bazowej zwracam liste [['XVC', 0.01], ['SRCC', 0.01]] kosztow wycofania
             self.lista_walut_gielda_bazowa = zwroc_liste_walut_bitbay()
+            # dla gieldy bazowej zwracam liste [['XVC', 0.01], ['SRCC', 0.01]] kosztow wycofania
+            self.lista_waluta_withdraws = get_bitbay_withdrawals()
         # poloniex
         if self.gielda_bazowa == 2:
             polo = poloniex(ApiKey, secret)
