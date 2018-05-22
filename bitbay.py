@@ -68,33 +68,33 @@ def zwroc_orderbook_bitbay(waluta, waluta2, kupno_sprzedaz, ilosc_do_przeslania)
     for item in asks_bids:
         ask.append(item)
 
-    # suma = 0
-    # ilosc_krypto = 0
-    # flag = True
-    # # potrzebuje zwrocic ilosc po przewalutowaniu
-    # for cena, ilosc in ask:
-    #
-    #     if suma < ilosc_do_przeslania and flag:
-    #         suma += cena * ilosc
-    #         ilosc_krypto += ilosc
-    #         print "ilosc kupionej" + str(ilosc_krypto)
-    #         print "suma " + str(suma)
-    #
-    #     if suma > ilosc_do_przeslania:
-    #         flag = False
-    #         suma -= cena * ilosc
-    #         ilosc_krypto -= ilosc
-    #         print "ilosc kupionej" + str(ilosc_krypto)
-    #         print "suma " + str(suma)
-    #         ile_dokupic = ilosc_do_przeslania-suma
-    #         ilosc_krypto += ile_dokupic/cena
-    #         print "ilosc kupionej" + str(ilosc_krypto)
-    #         print "suma " + str(suma)
-    #
-    #
-    # print ile_dokupic
-    # print suma
-    # print ilosc_krypto
+    suma = 0
+    ilosc_krypto = 0
+    flag = True
+    # potrzebuje zwrocic ilosc po przewalutowaniu
+    for cena, ilosc in ask:
+
+        if suma < ilosc_do_przeslania and flag:
+            suma += cena * ilosc
+            ilosc_krypto += ilosc
+            print "ilosc kupionej" + str(ilosc_krypto)
+            print "suma " + str(suma)
+
+        if suma > ilosc_do_przeslania:
+            flag = False
+            suma -= cena * ilosc
+            ilosc_krypto -= ilosc
+            print "ilosc kupionej" + str(ilosc_krypto)
+            print "suma " + str(suma)
+            ile_dokupic = ilosc_do_przeslania-suma
+            ilosc_krypto += ile_dokupic/cena
+            print "ilosc kupionej" + str(ilosc_krypto)
+            print "suma " + str(suma)
+
+
+    print ile_dokupic
+    print suma
+    print ilosc_krypto
 
         # pass
     # cena kupna jednej jednoski za walute2

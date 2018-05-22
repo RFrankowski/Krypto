@@ -109,6 +109,36 @@ class Kalkulator:
 
             data = data[kupno_sprzedaz]
             # zwracam cene danej kryptowaluty
+
+            # suma = 0.
+            # ilosc_krypto = 0.
+            # flag = True
+            # # potrzebuje zwrocic ilosc po przewalutowaniu
+            # for cena, ilosc in data:
+            #
+            #     if suma < self.ilosc_do_przeslania and flag:
+            #         suma += cena * ilosc
+            #         ilosc_krypto += ilosc
+            #         print "ilosc kupionej" + str(ilosc_krypto)
+            #         print "suma " + str(suma)
+            #
+            #     if suma > self.ilosc_do_przeslania:
+            #         flag = False
+            #         suma -= cena * ilosc
+            #         ilosc_krypto -= ilosc
+            #         print "ilosc kupionej" + str(ilosc_krypto)
+            #         print "suma " + str(suma)
+            #         ile_dokupic = self.ilosc_do_przeslania - suma
+            #         ilosc_krypto += ile_dokupic / cena
+            #         print "ilosc kupionej" + str(ilosc_krypto)
+            #         print "suma " + str(suma)
+            #
+            # print ile_dokupic
+            # print suma
+            # print ilosc_krypto
+
+
+
             return float(data[0][0])
 
     def zwroc_orderbook_bids(self, waluta1, waluta2):
