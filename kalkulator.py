@@ -99,7 +99,7 @@ class Kalkulator:
         # zwracam najbardziej korzystna cene danej kryptowaluty
         # na razie zwracam pierwsza oferte pozniej będę sumował oferty tak aby suma równa była ilości do przesłania
         if self.gielda_bazowa == 1:
-            return zwroc_orderbook_bitbay(waluta2, waluta1, kupno_sprzedaz)[0][0]
+            return zwroc_orderbook_bitbay(waluta2, waluta1, kupno_sprzedaz,self.ilosc_do_przeslania)[0][0]
 
         if self.gielda_bazowa == 2:
             time.sleep(0.3)

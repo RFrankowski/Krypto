@@ -8,13 +8,12 @@ from exceptions import Exception
 
 
 def get_bitbay_withdrawals():
-
     sock = urllib.urlopen("https://bitbay.net/en/fees")
     htmlSource = sock.read()
     sock.close()
     soup = bs.BeautifulSoup(htmlSource, 'lxml')
     list_kursow = []
-    lista_walut =[]
+    lista_walut = []
     try:
         for item in soup.find_all('section', id='withdrawals'):
             for listItem in item.find_all('li'):
@@ -32,6 +31,7 @@ def get_bitbay_withdrawals():
 
     return list_kursow
 
+
 # print get_bitbay_withdrawals()
 
 
@@ -43,6 +43,7 @@ def zwroc_liste_walut_bitbay():
         lista_walut.append(waluta_withdraw[0])
 
     return lista_walut
+
 
 # print zwroc_liste_walut_bitbay()
 
@@ -57,15 +58,45 @@ def get_specyfic_withdrawals_fee(waluta, koszt_wycofania):
 
 
 # funkcja zwraca koszt wycofania w walucie2
-def zwroc_orderbook_bitbay(waluta, waluta2, kupno_sprzedaz):
+def zwroc_orderbook_bitbay(waluta, waluta2, kupno_sprzedaz, ilosc_do_przeslania):
     time.sleep(1)
     response = requests.get("https://bitbay.net/API/Public/" + waluta + waluta2 + "/orderbook.json")
     data = response.json()
     # print data
     asks_bids = data[kupno_sprzedaz]
-    # ask = []
-    # for item in asks_bids:
-    #     ask.append(item)
+    ask = []
+    for item in asks_bids:
+        ask.append(item)
+
+    # suma = 0
+    # ilosc_krypto = 0
+    # flag = True
+    # # potrzebuje zwrocic ilosc po przewalutowaniu
+    # for cena, ilosc in ask:
+    #
+    #     if suma < ilosc_do_przeslania and flag:
+    #         suma += cena * ilosc
+    #         ilosc_krypto += ilosc
+    #         print "ilosc kupionej" + str(ilosc_krypto)
+    #         print "suma " + str(suma)
+    #
+    #     if suma > ilosc_do_przeslania:
+    #         flag = False
+    #         suma -= cena * ilosc
+    #         ilosc_krypto -= ilosc
+    #         print "ilosc kupionej" + str(ilosc_krypto)
+    #         print "suma " + str(suma)
+    #         ile_dokupic = ilosc_do_przeslania-suma
+    #         ilosc_krypto += ile_dokupic/cena
+    #         print "ilosc kupionej" + str(ilosc_krypto)
+    #         print "suma " + str(suma)
+    #
+    #
+    # print ile_dokupic
+    # print suma
+    # print ilosc_krypto
+
+        # pass
     # cena kupna jednej jednoski za walute2
     # cena_kupna = ask[0][0]
     # ilosc_w_ofercie = ask[0][1]
@@ -73,13 +104,9 @@ def zwroc_orderbook_bitbay(waluta, waluta2, kupno_sprzedaz):
     return asks_bids
 
 
-# print zwroc_orderbook_bitbay("BTC","GAME")
-
+print zwroc_orderbook_bitbay("GAME", "BTC", "asks", 0.01)
 
 
 
 
 # print zwrocListeWalut()
-
-
-
