@@ -37,7 +37,14 @@ except Exception as e:
 
 
 # for waluta_cena in list_kursow:
+<<<<<<< HEAD:binance.py
+#with open('binance.csv', 'a') as csv_file:
+    #writer = csv.writer(csv_file)
+   # for waluta_cena in list_kursow:
+        #writer.writerow([waluta_cena[0], waluta_cena[1], datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
+=======
 # with open('binance.csv', 'a') as csv_file:
 #     writer = csv.writer(csv_file)
 #     for waluta_cena in list_kursow:
 #         writer.writerow([waluta_cena[0], waluta_cena[1], datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
+>>>>>>> 0ffabad4cebf3d5fee3a9260b719f6ff923a0407:parsowanie_i_api/binance.py
