@@ -10,6 +10,5 @@ soup = bs.BeautifulSoup(r.text, 'lxml')
 
 
 
-
-for ul in soup.find_all('ul', class_='noticeListHeadBody clearfix' ):
+for ul in soup.find_all('ul', class_='noticeListHeadBody clearfix'):
     print(ul.text)
