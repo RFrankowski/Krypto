@@ -90,11 +90,11 @@ def zwroc_orderbook_bitbay(waluta, waluta2, kupno_sprzedaz, ilosc_do_przeslania)
             ilosc_krypto += ile_dokupic/cena
             print "ilosc kupionej" + str(ilosc_krypto)
             print "suma " + str(suma)
-
-
-    print ile_dokupic
-    print suma
-    print ilosc_krypto
+    #
+    #
+    # print ile_dokupic
+    # print suma
+    # print ilosc_krypto
 
         # pass
     # cena kupna jednej jednoski za walute2

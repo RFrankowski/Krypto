@@ -137,8 +137,6 @@ class Kalkulator:
             # print suma
             # print ilosc_krypto
 
-
-
             return float(data[0][0])
 
     def zwroc_orderbook_bids(self, waluta1, waluta2):
