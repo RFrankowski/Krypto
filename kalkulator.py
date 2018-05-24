@@ -99,7 +99,7 @@ class Kalkulator:
         # zwracam najbardziej korzystna cene danej kryptowaluty
         # na razie zwracam pierwsza oferte pozniej będę sumował oferty tak aby suma równa była ilości do przesłania
         if self.gielda_bazowa == 1:
-            return zwroc_orderbook_bitbay(waluta2, waluta1, kupno_sprzedaz)[0][0]
+            return zwroc_orderbook_bitbay(waluta2, waluta1, kupno_sprzedaz,self.ilosc_do_przeslania)[0][0]
 
         if self.gielda_bazowa == 2:
             time.sleep(0.3)
@@ -109,6 +109,36 @@ class Kalkulator:
 
             data = data[kupno_sprzedaz]
             # zwracam cene danej kryptowaluty
+
+            # suma = 0.
+            # ilosc_krypto = 0.
+            # flag = True
+            # # potrzebuje zwrocic ilosc po przewalutowaniu
+            # for cena, ilosc in data:
+            #
+            #     if suma < self.ilosc_do_przeslania and flag:
+            #         suma += cena * ilosc
+            #         ilosc_krypto += ilosc
+            #         print "ilosc kupionej" + str(ilosc_krypto)
+            #         print "suma " + str(suma)
+            #
+            #     if suma > self.ilosc_do_przeslania:
+            #         flag = False
+            #         suma -= cena * ilosc
+            #         ilosc_krypto -= ilosc
+            #         print "ilosc kupionej" + str(ilosc_krypto)
+            #         print "suma " + str(suma)
+            #         ile_dokupic = self.ilosc_do_przeslania - suma
+            #         ilosc_krypto += ile_dokupic / cena
+            #         print "ilosc kupionej" + str(ilosc_krypto)
+            #         print "suma " + str(suma)
+            #
+            # print ile_dokupic
+            # print suma
+            # print ilosc_krypto
+
+
+
             return float(data[0][0])
 
     def zwroc_orderbook_bids(self, waluta1, waluta2):

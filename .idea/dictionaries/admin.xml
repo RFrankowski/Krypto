@@ -41,6 +41,7 @@
       <w>docelowa</w>
       <w>docelowej</w>
       <w>dodac</w>
+      <w>dokupic</w>
       <w>dostane</w>
       <w>dostepne</w>
       <w>drugiej</w>
@@ -80,6 +81,7 @@
       <w>koszt</w>
       <w>kosztow</w>
       <w>kosztu</w>
+      <w>krypto</w>
       <w>kryptowaluty</w>
       <w>ktorych</w>
       <w>kupie</w>
@@ -128,6 +130,7 @@
       <w>podaj</w>
       <w>poloniex</w>
       <w>potrwać</w>
+      <w>potrzebuje</w>
       <w>powr</w>
       <w>powtorzyc</w>
       <w>pozniej</w>
@@ -220,6 +223,7 @@
       <w>zwraca</w>
       <w>zwracam</w>
       <w>zwroc</w>
+      <w>zwrocic</w>
     </words>
   </dictionary>
 </component>
