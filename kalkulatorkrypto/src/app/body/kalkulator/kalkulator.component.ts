@@ -12,8 +12,10 @@ export class KalkulatorComponent implements OnInit {
   data:HtmlParser;
   constructor(private klServ:KalService) {
     // ([aA-zZ]{3,4}:\s[0-9](\.*[0-9]{0,8})
-    klServ.getData().subscribe(d =>  this.data = d["_body"]);
+
     
+    klServ.getData().subscribe(d =>  this.data = d["_body"]);
+   
    }
 
   ngOnInit() {
