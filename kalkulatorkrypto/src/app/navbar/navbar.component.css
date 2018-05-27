@@ -5,7 +5,7 @@ img.logo{
 	width: 120px; 
 	-webkit-transition: all .5s;
     transition: all .5s;
-	left: 32.5%;
+	
 	
 }
 #global-nav{
@@ -23,10 +23,6 @@ img.logo{
 .nav{
 	width: 70%;
 	margin: 0 auto;
-}
-.nav span{
-	opacity: 0;
-        animation: loading 3s linear infinite alternate;
 }
 .logo {
 	position: absolute;
@@ -82,54 +78,56 @@ img.logo{
 .logo span:nth-child(10) {
     animation-delay: 2.25s;
 }
-.logo span:nth-child(12) {
+.logo span:nth-child(14) {
     animation-delay: 2.5s;
 }
 
-.logo span:nth-child(13) {
+.logo span:nth-child(15) {
     animation-delay: 2.75s;
 }
-.logo span:nth-child(14) {
+.logo span:nth-child(16) {
     animation-delay: 3s;
 }
-.logo span:nth-child(15) {
+.logo span:nth-child(17) {
     animation-delay: 3.25s;
 }
 
-.logo span:nth-child(16) {
+.logo span:nth-child(18) {
     animation-delay: 3.5s;
 }
-.logo span:nth-child(17) {
+.logo span:nth-child(19) {
     animation-delay: 3.75s;
 }
 
-.logo span:nth-child(18) {
+.logo span:nth-child(20) {
     animation-delay: 4s;
 }
-.logo span:nth-child(19) {
+.logo span:nth-child(21) {
     animation-delay: 4.25s;
 }
 
-.logo span:nth-child(20) {
+.logo span:nth-child(22) {
     animation-delay: 4.5s;
 }
-.logo span:nth-child(26) {
+.logo span:nth-child(23) {
     animation-delay: 4.75s;
 }
-.logo span:nth-child(27) {
+.logo span:nth-child(32) {
     animation-delay: 5s;
 }
-.logo span:nth-child(28) {
+.logo span:nth-child(33) {
     animation-delay: 5.25s;
 }
-.logo span:nth-child(29) {
+.logo span:nth-child(34) {
     animation-delay: 5.5s;
 }
-.logo span:nth-child(30) {
+.logo span:nth-child(35) {
     animation-delay: 5.75s;
 }
-.logo span:nth-child(31) {
+.logo span:nth-child(36) {
     animation-delay: 6s;
 }
-
+.logo span:nth-child(37) {
+    animation-delay: 6.25s;
+}
 
