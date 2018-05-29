@@ -16,7 +16,8 @@ img.logo{
 	height: 150px;
 	/* position: fixed; */
 	-webkit-transition: height .5s, line-height .5s; /* Safari */
-	transition: height .5s, line-height .5s;
+    transition: height .5s, line-height .5s;
+    
 	
 
 }

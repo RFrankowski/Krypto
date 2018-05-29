@@ -5,7 +5,7 @@
 }
 .container{
     width: 100%;
-    border: 2px solid rgb(78, 143, 240);
+    border: 2px solid rgb(2, 5, 4);
     border-radius: 20px;
     
 }
@@ -13,14 +13,14 @@
     width: 300px;
 } */
 .btc{
-    border: 2px solid rgb(78, 143, 240);
+    border: 2px solid rgb(2, 5, 4);
 }
 #sel1{
-    border: 2px solid rgb(78, 143, 240);
+    border: 2px solid rgb(2, 5, 4);
     height: 40px;
 }
 #sel2{
-    border: 2px solid rgb(78, 143, 240);
+    border: 2px solid rgb(2, 5, 4);
     height: 40px;
 }
  .btn:hover, .btn:focus {
@@ -28,9 +28,9 @@
     outline: 0;
   }
   .button {
-    border: 2px solid rgb(78, 143, 240);
-    color: rgb(78, 143, 240);
-    background-image: linear-gradient(45deg, rgb(78, 143, 240) 50%, transparent 50%);
+    border: 2px solid rgb(2, 5, 4);
+    color: rgb(2, 5, 4);
+    background-image: linear-gradient(45deg, rgb(2, 5, 4) 50%, transparent 50%);
     background-position: 100%;
     background-size: 400%;
     transition: background 300ms ease-in-out;
