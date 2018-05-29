@@ -9,7 +9,15 @@
 
         <div class="form-group ">
           <label class="col-form-label">Ile chcesz przesłać BTC?</label>
-            <input type="text" placeholder="Wprowadź ilość" type="text" class="form-control col-sm-4 btc">
+            <input id ="przelicz"
+             type="text"
+              placeholder="Wprowadź ilość"
+               type="text"
+                class="form-control col-sm-6 btc">
+            <!-- <div class = "alert alert-danger" *ngIf ="przelicz.touched && !przelicz.valid" >
+              <div *ngIf = "przelicz.errors.required"> Nr konta jest wymagany</div>
+              <div *ngIf = "przelicz.errors.minlength">Nr konta musi zawierać co najmniej 1 cyfre</div>
+                <div *ngIf ="przelicz.errors.pattern">Nr konta musi byc cyfra</div> -->
         </div>
         <div class="form-group">
           <label for="sel1">Prześlij z</label>
