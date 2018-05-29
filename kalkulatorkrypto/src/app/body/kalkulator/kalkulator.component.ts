@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Kalkulator } from './../../shared/services/kal.model';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { KalService } from '../../shared/services/kal.service';
 import { HtmlParser } from '@angular/compiler';
+import { NgForm } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-kalkulator',
@@ -18,6 +22,13 @@ export class KalkulatorComponent implements OnInit {
    
    }
 
+   dodajKalk(f: NgForm) {
+    let kalk: Kalkulator  = new Kalkulator();
+    kalk.ilosc = f.value.ilosc;
+    
+    f.resetForm();
+  }
+   
   ngOnInit() {
   }
 
