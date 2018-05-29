@@ -15,4 +15,12 @@ export class KalService {
 
   }
 
+
+  getPoloniexFee(){
+    // let proba;
+    return this.http.get("https://poloniex.com/public?command=returnCurrencies");
+
+   
+  }
+
 }
