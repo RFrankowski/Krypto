@@ -10,7 +10,7 @@ export class KalService {
 
   }
 
-  getData(){
+  getBitbayFee(){
     return this.http.get("https://bitbay.net/en/fees");
 
   }
