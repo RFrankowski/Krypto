@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center">
   <div class="container col-md-8">
 
-    <h1 class="display-4"> Przelicz koszt transferu:</h1>
+    <h1 class="display-4"> Przelicz koszt transferu</h1>
 
 
     <div class="card-body ">
@@ -9,15 +9,15 @@
 
         <form ngForm #f="ngForm">
           <div class="form-group col-sm-6 " style="margin-right: auto ; margin-left: auto">
-              <label class="col-form-label">Ile chcesz przesłać BTC?</label>
-              <input id="ilosc" type="text" placeholder="Wprowadź ilość" required ngModel name="ilosc" pattern="^([0-9]{1,6}(\.*[0-9]{0,8}))$"
-                #ilosc="ngModel" type="text" class="form-control btc">
-  
-              <div class="alert alert-danger" *ngIf="ilosc.touched && !ilosc.valid">
-                <div *ngIf="ilosc.errors.required">Wprowadź ilość</div>
-                <div *ngIf="ilosc.errors.pattern">Ilość musi być liczbą</div>
-  
-              </div>
+            <label class="col-form-label">Ile chcesz przesłać BTC?</label>
+            <input id="ilosc" type="text" placeholder="Wprowadź ilość" required ngModel name="ilosc" pattern="^([0-9]{1,6}(\.*[0-9]{0,8}))$"
+              #ilosc="ngModel" type="text" class="form-control btc">
+
+            <div class="alert alert-danger" *ngIf="ilosc.touched && !ilosc.valid">
+              <div *ngIf="ilosc.errors.required">Wprowadź ilość</div>
+              <div *ngIf="ilosc.errors.pattern">Ilość musi być liczbą</div>
+
+            </div>
 
             <label for="sel1">Prześlij z</label>
             <select class="form-control " id="sel1">
@@ -38,21 +38,27 @@
           </div>
 
           <div class="form-group col-md-6" style="margin-right: auto ; margin-left: auto">
-            <button type="button" class="btn button">Przelicz</button>
+            <button type="button" class="btn button" (click)="dodajKalk(f)" >Przelicz</button>
           </div>
-          
+
 
 
         </form>
-        </div>
-
       </div>
 
     </div>
-  </div>
 
-  <!-- {{data|json}} -->
-  <!-- <ul>
+  </div>
+</div>
+
+<!-- {{data|json}} -->
+<!-- <ul>
   <li *ngFor="let pol of poloniexFee">{{pol.ABY.txFee|json}}</li>
 </ul> -->
-  <!-- {{poloniexFee|json}} -->
+<!-- {{poloniexFee|json}} -->
+
+<!-- {{poloniexOrderbook |json}} -->
+
+<ul>
+  <li *ngFor="let pol of polkeys">{{pol|json}}</li>
+</ul>

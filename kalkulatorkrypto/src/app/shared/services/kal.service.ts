@@ -17,10 +17,17 @@ export class KalService {
 
 
   getPoloniexFee(){
-    // let proba;
     return this.http.get("https://poloniex.com/public?command=returnCurrencies");
 
    
   }
+
+
+  getPoloniexOrderbook(){
+
+    return this.http.get("https://poloniex.com/public?command=returnOrderBook&currencyPair=ALL&depth=1");
+
+  }
+
 
 }

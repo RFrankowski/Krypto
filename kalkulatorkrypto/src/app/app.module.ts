@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { KalkulatorComponent } from './body/kalkulator/kalkulator.component';
 import { KalService } from './shared/services/kal.service';
+import { KeyspipePipe } from './shared/services/keyspipe.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    KalkulatorComponent
+    KalkulatorComponent,
+    KeyspipePipe
   ],
   imports: [
     BrowserModule,
