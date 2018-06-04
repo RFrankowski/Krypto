@@ -25,6 +25,19 @@ export class KalkulatorComponent implements OnInit {
     XIN: 2,
     XRP: 0.1,
   }
+
+  bitbayBids = {
+    LTC: [],
+    ETH: [],
+    LSK: [],
+    BCC: [],
+    GAME: [],
+    DASH: [],
+    BTG: [],
+    KZC: [],
+    XIN: [],
+    XRP: [],
+  }
   // bitbay:string[] = ['BTC', ]
 
 
@@ -58,6 +71,22 @@ export class KalkulatorComponent implements OnInit {
       this.polOrderbook = d.json();
 
     })
+
+    for (let i = 0; i < this.bitbayKeys.length; i++) {
+
+      klServ.getBitbayOrderbook(this.bitbayKeys[i]).subscribe(d => {
+        // d.json()['bids'][0];
+        if (this.bitbayKeys[i] != "BTC") {
+          this.bitbayBids[this.bitbayKeys[i]] = d.json()['bids'][0]
+
+          // console.log( d.json()['bids'][0]);;
+          //  console.log(d.json()['bids'][0]);  
+        }
+
+      })
+
+    }
+
 
 
   }
@@ -137,24 +166,19 @@ export class KalkulatorComponent implements OnInit {
         // odejmuje fee
         let waluta_waluta: string[] = this.polkeys[i].split('_');
 
-        if (-1 != this.bitbayKeys.indexOf(waluta_waluta[1])) {
+        if (-1 != this.bitbayKeys.indexOf(waluta_waluta[1]) && this.bitbayKeys[i] != "BTC") {
 
           this.kupWalute = ilosc / this.polOrderbook[this.polkeys[i]]["asks"][0][0];
           this.kupWalute -= this.poloniexFee[waluta_waluta[1]]['txFee'];
 
-          // console.log(waluta_waluta[1]);
-
-          let cena :number;
-          this.klServ.getBitbayOrderbook(waluta_waluta[1]).subscribe(d => { cena = d.json()['bids'][0]});
-          
-          // console.log(cena);
-
-          
+          this.kupWalute = this.bitbayBids[waluta_waluta[1]][0] * this.kupWalute
+          // console.log(this.kupWalute);
+          console.log(this.bitbayBids[waluta_waluta[1]][0]);
         }
 
         // console.log(waluta_waluta[1]);
 
-        // console.log(this.kupWalute);
+        console.log(this.kupWalute);
       }
     }
   }
