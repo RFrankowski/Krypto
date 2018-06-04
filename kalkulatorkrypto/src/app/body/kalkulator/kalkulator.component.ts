@@ -26,7 +26,7 @@ export class KalkulatorComponent implements OnInit {
     XRP: 0.1,
   }
 
-  bitbayKeys =  Object.keys(this.bitbay);
+  bitbayKeys = Object.keys(this.bitbay);
 
   poloniexFee: any[];
 
@@ -41,7 +41,9 @@ export class KalkulatorComponent implements OnInit {
     // ([aA-zZ]{3,4}:\s[0-9]{0,5}(\.*[0-9]{0,8})
 
 
-    klServ.getBitbayFee().subscribe(d => this.bitbayFee = this.matchAll(d["_body"], /[aA-zZ]{3,4}:\s[0-9](\.*[0-9]{0,8})/));
+    // klServ.getBitbayFee().subscribe(d => this.bitbayFee = this.kupa(d["_body"],/([aA-zZ]{3,4}:\s[0-9]{1,6}(\.*[0-9]{0,8}))*/));
+    klServ.getBitbayFee().subscribe(d => this.bitbayFee = this.parseBitbay(d["_body"]));
+
     // klServ.getPoloniexFee().subscribe(d => this.poloniexFee = [d.json()]);
 
     // pobieram orderbook z poloniex
@@ -54,21 +56,45 @@ export class KalkulatorComponent implements OnInit {
 
   }
 
+  parseBitbay(str) {
+    // re = /\s*([^[:]+):\"([^"]+)"/g;
+    var myRe = /[aA-zZ]{3,4}:\s[0-9]{1,6}(\.*[0-9]{0,8})/g;
+    // var str = "abbcdefabh";
+    let waluta_fee: string[] = [];
+    let myArray: any[];
+
+
+    let i = 0;
+    while ((myArray = myRe.exec(str)) !== null && i < 11) {
+      var msg: string = myArray[0];
+      if (msg.substring(0, 3) != "NIP"  ) {
+        // let wal_cena :string[] =msg.split(':')
+        // console.log(msg.split(':'));
+        waluta_fee.push(msg);
+      }
+      // msg += "Next match starts at " + myRe.lastIndex;
+      i++;
+    }
+    // return [ "BTC: 0.00045", "LTC: 0.005"]
+    return waluta_fee;
+
+  }
+
 
   matchAll(str, regex) {
     let res = [];
     let m;
     if (regex.global) {
-        while (m = regex.exec(str)) {
-            res.push(m[1]);
-        }
+      while (m = regex.exec(str)) {
+        res.push(m[1]);
+      }
     } else {
-        if (m = regex.exec(str)) {
-            res.push(m[1]);
-        }
+      if (m = regex.exec(str)) {
+        res.push(m[1]);
+      }
     }
     return res;
-}
+  }
 
 
   dodajKalk(f: NgForm) {
@@ -76,21 +102,21 @@ export class KalkulatorComponent implements OnInit {
     // kalk.ilosc = f.value.ilosc;
 
     // pokauzje pierwsza oferte kupna 
-    
+
     this.kupPoloniex(f);
 
 
     // f.resetForm();
   }
 
-  kupBitbay(){
-    
+  kupBitbay() {
+
 
   }
 
 
 
-  kupPoloniex(f :NgForm){
+  kupPoloniex(f: NgForm) {
     for (let i = 0; i < this.polkeys.length; i++) {
       if (this.polkeys[i].substr(0, 3) === "BTC") {
         // this.polOrderbook[this.polkeys[i]]["asks"][0] -- zwraca ["0.00002386", 24.71649195] cene i ilosc
