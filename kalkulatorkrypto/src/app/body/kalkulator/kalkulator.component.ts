@@ -25,8 +25,10 @@ export class KalkulatorComponent implements OnInit {
     XIN: 2,
     XRP: 0.1,
   }
+  // bitbay:string[] = ['BTC', ]
 
-  bitbayKeys = Object.keys(this.bitbay);
+
+  bitbayKeys: string[] = Object.keys(this.bitbay);
 
   poloniexFee: any[];
 
@@ -37,6 +39,8 @@ export class KalkulatorComponent implements OnInit {
   polOrderbook: any[]
 
   kupWalute: number;
+
+
 
 
 
@@ -58,8 +62,8 @@ export class KalkulatorComponent implements OnInit {
 
   }
 
-  polFee(){
-    
+  polFee() {
+
   }
 
   parseBitbay(str) {
@@ -73,7 +77,7 @@ export class KalkulatorComponent implements OnInit {
     let i = 0;
     while ((myArray = myRe.exec(str)) !== null && i < 11) {
       var msg: string = myArray[0];
-      if (msg.substring(0, 3) != "NIP"  ) {
+      if (msg.substring(0, 3) != "NIP") {
         // let wal_cena :string[] =msg.split(':')
         // console.log(msg.split(':'));
         waluta_fee.push(msg);
@@ -104,12 +108,12 @@ export class KalkulatorComponent implements OnInit {
 
 
   dodajKalk(f: NgForm) {
-    
+
     // let kalk: Kalkulator  = new Kalkulator();
     // kalk.ilosc = f.value.ilosc;
 
     // bez przewalutowania
-    
+
     // pokauzje pierwsza oferte kupna 
     this.kupPoloniex(f);
 
@@ -117,26 +121,48 @@ export class KalkulatorComponent implements OnInit {
     // f.resetForm();
   }
 
- 
+
 
 
 
   kupPoloniex(f: NgForm) {
-    let ilosc:number = f.value.ilosc;
-
+    let ilosc: number = f.value.ilosc;
+    // console.log(this.bitbayKeys);
+    // console.log(this.polkeys);
     // ilosc -= this.poloniexFee['BTC']['txFee'];
-    
-    for (let i = 0; i < this.polkeys.length; i++) {  
+
+    for (let i = 0; i < this.polkeys.length; i++) {
       if (this.polkeys[i].substr(0, 3) === "BTC") {
         // this.polOrderbook[this.polkeys[i]]["asks"][0] -- zwraca ["0.00002386", 24.71649195] cene i ilosc
-        this.kupWalute = ilosc / this.polOrderbook[this.polkeys[i]]["asks"][0][0];
         // odejmuje fee
-        let wal:string[] = this.polkeys[i].split('_');
-        this.kupWalute -= this.poloniexFee[wal[1]]['txFee'];
-        console.log(this.kupWalute);
+        let waluta_waluta: string[] = this.polkeys[i].split('_');
+
+        if (-1 != this.bitbayKeys.indexOf(waluta_waluta[1])) {
+
+          this.kupWalute = ilosc / this.polOrderbook[this.polkeys[i]]["asks"][0][0];
+          this.kupWalute -= this.poloniexFee[waluta_waluta[1]]['txFee'];
+
+          // console.log(waluta_waluta[1]);
+
+          let cena :number;
+          this.klServ.getBitbayOrderbook(waluta_waluta[1]).subscribe(d => { cena = d.json()['bids'][0]});
+          
+          // console.log(cena);
+
+          
+        }
+
+        // console.log(waluta_waluta[1]);
+
+        // console.log(this.kupWalute);
       }
     }
   }
+
+
+
+
+
 
   ngOnInit() {
   }
