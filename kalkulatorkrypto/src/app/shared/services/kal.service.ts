@@ -29,5 +29,11 @@ export class KalService {
 
   }
 
+  getBitbayOrderbook(waluta:string){
+
+    return this.http.get("https://bitbay.net/API/Public/"+waluta+"BTC/orderbook.json");
+    
+  }
+
 
 }
