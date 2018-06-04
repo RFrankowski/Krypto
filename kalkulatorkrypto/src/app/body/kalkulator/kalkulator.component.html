@@ -68,7 +68,20 @@
             <ng-container *ngFor="let wy of wynik">
               <tr>
                 <td>{{wy[0]}}</td>
-                <td>{{wy[1]}}</td>
+                <ng-container *ngIf="(wy[1]-1) >= 0">
+                <td>
+                  <font color="green">
+                      {{wy[1]}}
+                  </font>
+                  </td>
+              </ng-container>
+              <ng-container *ngIf="(wy[1]-1) < 0">
+                  <td>
+                    <font color="red">
+                        {{wy[1]}}
+                    </font>
+                    </td>
+                </ng-container>
               </tr>
             </ng-container>
 
