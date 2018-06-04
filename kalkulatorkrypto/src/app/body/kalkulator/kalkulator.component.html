@@ -20,7 +20,7 @@
             </div>
 
             <label for="sel1">Prześlij z</label>
-            <select class="form-control " id="sel1">
+            <select class="form-control " id="bazowa" ngModel name="bazowa" #bazowa="ngModel"  >
               <option value="-1">Wybierz giełdę bazową</option>
               <option value="Poloniex">Poloniex</option>
               <option value="Bitbay">Bitbay</option>
@@ -29,7 +29,7 @@
 
 
             <label for="sel1">Prześlij do</label>
-            <select class="form-control " id="sel2">
+            <select class="form-control " id="docelowa" ngModel name="docelowa" #docelowa="ngModel">
               <option value="-1">Wybierz giełdę docelową</option>
               <option value="Poloniex">Poloniex</option>
               <option value="Bitbay">Bitbay</option>
