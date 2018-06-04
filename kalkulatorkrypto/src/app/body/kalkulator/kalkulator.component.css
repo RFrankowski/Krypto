@@ -10,17 +10,23 @@
     border-radius: 20px;
     
 }
+.wynik{
+    width: 100%;
+    border: 2px solid rgb(204, 102, 0);
+    border-radius: 20px;
+   
+}
 /* .form-control{
     width: 300px;
 } */
 .btc{
     border: 2px solid rgb(204, 102, 0);
 }
-#sel1{
+#docelowa{
     border: 2px solid rgb(204, 102, 0);
     height: 40px;
 }
-#sel2{
+#bazowa{
     border: 2px solid rgb(204, 102, 0);
     height: 40px;
 }
