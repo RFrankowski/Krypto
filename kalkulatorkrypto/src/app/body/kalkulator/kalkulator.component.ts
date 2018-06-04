@@ -38,6 +38,8 @@ export class KalkulatorComponent implements OnInit {
     XIN: [],
     XRP: [],
   }
+
+  wynik: any[] = []
   // bitbay:string[] = ['BTC', ]
 
 
@@ -75,12 +77,8 @@ export class KalkulatorComponent implements OnInit {
     for (let i = 0; i < this.bitbayKeys.length; i++) {
 
       klServ.getBitbayOrderbook(this.bitbayKeys[i]).subscribe(d => {
-        // d.json()['bids'][0];
         if (this.bitbayKeys[i] != "BTC") {
           this.bitbayBids[this.bitbayKeys[i]] = d.json()['bids'][0]
-
-          // console.log( d.json()['bids'][0]);;
-          //  console.log(d.json()['bids'][0]);  
         }
 
       })
@@ -173,14 +171,26 @@ export class KalkulatorComponent implements OnInit {
 
           this.kupWalute = this.bitbayBids[waluta_waluta[1]][0] * this.kupWalute
           // console.log(this.kupWalute);
-          console.log(this.bitbayBids[waluta_waluta[1]][0]);
+          // console.log(this.bitbayBids[waluta_waluta[1]][0]);
+          this.wynik.push([waluta_waluta[1], this.kupWalute])
+        } else if (waluta_waluta[1] == 'BCH') {
+
+          this.kupWalute = ilosc / this.polOrderbook[this.polkeys[i]]["asks"][0][0];
+          this.kupWalute -= this.poloniexFee[waluta_waluta[1]]['txFee'];
+          this.kupWalute = this.bitbayBids["BCC"][0] * this.kupWalute;
+          this.wynik.push([waluta_waluta[1], this.kupWalute]);
+
         }
 
         // console.log(waluta_waluta[1]);
-
-        console.log(this.kupWalute);
+        // console.log(this.kupWalute);
       }
     }
+    let withoutWithdraw: number = ilosc - this.poloniexFee["BTC"]['txFee'];
+    this.wynik.push(["BTC", withoutWithdraw]);
+
+
+    console.log(this.wynik);
   }
 
 

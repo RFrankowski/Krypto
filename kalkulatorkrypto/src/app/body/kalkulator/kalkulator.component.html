@@ -4,7 +4,7 @@
     <h1 class="display-4"> Przelicz koszt transferu</h1>
 
 
-    <div class="card-body " >
+    <div class="card-body ">
       <div class="form-group">
 
         <form ngForm #f="ngForm">
@@ -57,10 +57,8 @@
 </ul> -->
 <!-- {{poloniexFee|json}} -->
 
-<!-- {{bitbayBids |json}} -->
+<!-- {{polkeys |json}} -->
 
-<!-- <div *ngIf="polkeys">
-  <ul>
-    <li *ngFor="let pol of polkeys">{{polOrderbook.pol|json}}</li>
-  </ul>
-</div> -->
+<ul>
+  <li *ngFor="let wy of wynik">{{wy |json}}</li>
+</ul>
