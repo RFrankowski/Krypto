@@ -1,11 +1,21 @@
+<<<<<<< HEAD
 <div class="d-flex align-items-center">
 
 
   <div class="container col-md-8">
 
     <h1 class="display-4" style="text-align: center;"> Przelicz koszt transferu</h1>
+=======
+<div class="row">
+  <div class="d-flex align-items-center">
 
 
+    <div class="container col-md-8">
+>>>>>>> ec6cd5daf1f1322b5efad0ba64058156beaa082c
+
+      <h1 class="display-4" style="text-align: center;"> Przelicz koszt transferu</h1>
+
+<<<<<<< HEAD
     <div class="card-body ">
 
       <div class="form-group">
@@ -16,42 +26,97 @@
             <label class="col-form-label">Ile chcesz przesłać BTC?</label>
             <input id="ilosc" type="text" placeholder="Wprowadź ilość" required ngModel name="ilosc" pattern="^([0-9]{1,6}(\.*[0-9]{0,8}))$"
               #ilosc="ngModel" type="text" class="form-control btc">
+=======
+>>>>>>> ec6cd5daf1f1322b5efad0ba64058156beaa082c
 
-            <div class="alert alert-danger" *ngIf="ilosc.touched && !ilosc.valid">
-              <div *ngIf="ilosc.errors.required">Wprowadź ilość</div>
-              <div *ngIf="ilosc.errors.pattern">Ilość musi być liczbą</div>
+      <div class="card-body ">
 
-            </div>
+        <div class="form-group">
 
+
+          <form ngForm #f="ngForm">
+            <div class="form-group col-sm-6 " style="margin-right: auto ; margin-left: auto;">
+              <label class="col-form-label">Ile chcesz przesłać BTC?</label>
+              <input id="ilosc" type="text" placeholder="Wprowadź ilość" required ngModel name="ilosc" pattern="^([0-9]{1,6}(\.*[0-9]{0,8}))$"
+                #ilosc="ngModel" type="text" class="form-control btc">
+
+              <div class="alert alert-danger" *ngIf="ilosc.touched && !ilosc.valid">
+                <div *ngIf="ilosc.errors.required">Wprowadź ilość</div>
+                <div *ngIf="ilosc.errors.pattern">Ilość musi być liczbą</div>
+
+              </div>
+
+<<<<<<< HEAD
             <label for="sel1">Prześlij z</label>
             <select class="form-control " id="bazowa" ngModel name="bazowa" #bazowa="ngModel">
               <option value="-1" disabled-selected>Wybierz giełdę bazową</option>
               <option value="Poloniex">Poloniex</option>
               <option value="Bitbay">Bitbay</option>
+=======
+              <label for="sel1">Prześlij z</label>
+              <select class="form-control " id="bazowa" ngModel name="bazowa" #bazowa="ngModel">
+                <option value="-1">Wybierz giełdę bazową</option>
+                <option value="Poloniex">Poloniex</option>
+                <option value="Bitbay">Bitbay</option>
+>>>>>>> ec6cd5daf1f1322b5efad0ba64058156beaa082c
 
-            </select>
-
-
-            <label for="sel1">Prześlij do</label>
-            <select class="form-control " id="docelowa" ngModel name="docelowa" #docelowa="ngModel">
-              <option value="-1">Wybierz giełdę docelową</option>
-              <option value="Poloniex">Poloniex</option>
-              <option value="Bitbay">Bitbay</option>
-
-            </select>
-          </div>
-
-          <div class="form-group col-md-6" style="margin-right: auto ; margin-left: auto">
-            <button type="button" class="btn button" (click)="dodajKalk(f)">Przelicz</button>
-          </div>
+              </select>
 
 
+              <label for="sel1">Prześlij do</label>
+              <select class="form-control " id="docelowa" ngModel name="docelowa" #docelowa="ngModel">
+                <option value="-1">Wybierz giełdę docelową</option>
+                <option value="Poloniex">Poloniex</option>
+                <option value="Bitbay">Bitbay</option>
 
-        </form>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6" style="margin-right: auto ; margin-left: auto">
+              <button type="button" class="btn button" (click)="dodajKalk(f)">Przelicz</button>
+            </div>
+
+
+
+          </form>
+        </div>
+
+
       </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ec6cd5daf1f1322b5efad0ba64058156beaa082c
     </div>
+    <ng-container *ngIf="wynik.length > 0">
+      <div class="container col-md-4" style="margin-left: 10px">
+        <h1 class="display-4" style="text-align: center;"></h1>
+        <div class="card-body ">
+          <table >
+            <tr>
+              <th class="col-sm" >Waluta</th>
+              <th class="col-sm">Zysk</th>
+            </tr>
+
+            <ng-container *ngFor="let wy of wynik">
+              <tr>
+                <td>{{wy[0]}}</td>
+                <td>{{wy[1]}}</td>
+              </tr>
+            </ng-container>
+
+
+
+            <!-- <div class="form-group"> -->
+            <!-- <ul class="list-group"> -->
+
+            <!-- </ul> -->
+            <!-- </div> -->
+          </table>
+        </div>
+      </div>
+    </ng-container>
 
 
 
