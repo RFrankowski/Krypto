@@ -1,12 +1,17 @@
+
 <div class="d-flex align-items-center">
-  <div class="container col-md-8">
+    <div class = "row">
+   
+  <div class="container col-md-8" >
 
-    <h1 class="display-4"> Przelicz koszt transferu</h1>
+    <h1 class="display-4" style = "text-align: center;" > Przelicz koszt transferu</h1>
 
 
-    <div class="card-body ">
+    <div class="card-body " >
+      
       <div class="form-group">
-
+       
+        
         <form ngForm #f="ngForm">
           <div class="form-group col-sm-6 " style="margin-right: auto ; margin-left: auto;">
             <label class="col-form-label">Ile chcesz przesłać BTC?</label>
@@ -46,10 +51,16 @@
 
         </form>
       </div>
-
+     
+       
     </div>
 
   </div>
+ 
+  <ul class="list-group" >
+        <li class="list-group-item"  *ngFor="let wy of wynik">{{wy}}</li>
+    </ul>
+</div>
 </div>
 
 <!-- {{data|json}} -->
@@ -60,6 +71,12 @@
 
 <!-- {{polkeys |json}} -->
 
-<ul>
-  <li *ngFor="let wy of wynik">{{wy |json}}</li>
-</ul>
+
+
+
+
+
+
+   
+
+  
