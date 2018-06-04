@@ -37,14 +37,16 @@ export class KalkulatorComponent implements OnInit {
   polOrderbook: any[]
 
   kupWalute: number;
+
+
+
   constructor(private klServ: KalService) {
     // ([aA-zZ]{3,4}:\s[0-9]{0,5}(\.*[0-9]{0,8})
 
 
-    // klServ.getBitbayFee().subscribe(d => this.bitbayFee = this.kupa(d["_body"],/([aA-zZ]{3,4}:\s[0-9]{1,6}(\.*[0-9]{0,8}))*/));
     klServ.getBitbayFee().subscribe(d => this.bitbayFee = this.parseBitbay(d["_body"]));
 
-    // klServ.getPoloniexFee().subscribe(d => this.poloniexFee = [d.json()]);
+    klServ.getPoloniexFee().subscribe(d => this.poloniexFee = d.json());
 
     // pobieram orderbook z poloniex
     klServ.getPoloniexOrderbook().subscribe(d => {
@@ -54,6 +56,10 @@ export class KalkulatorComponent implements OnInit {
     })
 
 
+  }
+
+  polFee(){
+    
   }
 
   parseBitbay(str) {
@@ -98,31 +104,36 @@ export class KalkulatorComponent implements OnInit {
 
 
   dodajKalk(f: NgForm) {
+    
     // let kalk: Kalkulator  = new Kalkulator();
     // kalk.ilosc = f.value.ilosc;
 
+    // bez przewalutowania
+    
     // pokauzje pierwsza oferte kupna 
-
     this.kupPoloniex(f);
 
 
     // f.resetForm();
   }
 
-  kupBitbay() {
-
-
-  }
+ 
 
 
 
   kupPoloniex(f: NgForm) {
-    for (let i = 0; i < this.polkeys.length; i++) {
+    let ilosc:number = f.value.ilosc;
+
+    // ilosc -= this.poloniexFee['BTC']['txFee'];
+    
+    for (let i = 0; i < this.polkeys.length; i++) {  
       if (this.polkeys[i].substr(0, 3) === "BTC") {
         // this.polOrderbook[this.polkeys[i]]["asks"][0] -- zwraca ["0.00002386", 24.71649195] cene i ilosc
-        this.kupWalute = f.value.ilosc / this.polOrderbook[this.polkeys[i]]["asks"][0][0];
+        this.kupWalute = ilosc / this.polOrderbook[this.polkeys[i]]["asks"][0][0];
+        // odejmuje fee
+        let wal:string[] = this.polkeys[i].split('_');
+        this.kupWalute -= this.poloniexFee[wal[1]]['txFee'];
         console.log(this.kupWalute);
-        // console.log(this.polkeys[i].split("_"))
       }
     }
   }
