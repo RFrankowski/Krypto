@@ -1,17 +1,16 @@
-
 <div class="d-flex align-items-center">
-    <div class = "row">
-   
-  <div class="container col-md-8" >
-
-    <h1 class="display-4" style = "text-align: center;" > Przelicz koszt transferu</h1>
 
 
-    <div class="card-body " >
-      
+  <div class="container col-md-8">
+
+    <h1 class="display-4" style="text-align: center;"> Przelicz koszt transferu</h1>
+
+
+    <div class="card-body ">
+
       <div class="form-group">
-       
-        
+
+
         <form ngForm #f="ngForm">
           <div class="form-group col-sm-6 " style="margin-right: auto ; margin-left: auto;">
             <label class="col-form-label">Ile chcesz przesłać BTC?</label>
@@ -25,8 +24,8 @@
             </div>
 
             <label for="sel1">Prześlij z</label>
-            <select class="form-control " id="bazowa" ngModel name="bazowa" #bazowa="ngModel"  >
-              <option value="-1">Wybierz giełdę bazową</option>
+            <select class="form-control " id="bazowa" ngModel name="bazowa" #bazowa="ngModel">
+              <option value="-1" disabled-selected>Wybierz giełdę bazową</option>
               <option value="Poloniex">Poloniex</option>
               <option value="Bitbay">Bitbay</option>
 
@@ -50,17 +49,25 @@
 
         </form>
       </div>
-     
-       
+
+
     </div>
 
+
+
+
   </div>
- 
-  <ul class="list-group" >
-        <li class="list-group-item"  *ngFor="let wy of wynik">{{wy}}</li>
-    </ul>
+  <ng-container *ngIf = "wynik.length > 0 ">
+  <div class = "wynik">
+  <div class="card-body ">
+      <div class="form-group col-md-10">
+    
+      <li *ngFor="let wy of wynik">{{wy}}</li>
+    
+  </div>
+  </div>
 </div>
-</div>
+</ng-container>
 
 <!-- {{data|json}} -->
 <!-- <ul>
@@ -69,13 +76,3 @@
 <!-- {{poloniexFee|json}} -->
 
 <!-- {{polkeys |json}} -->
-
-
-
-
-
-
-
-   
-
-  
