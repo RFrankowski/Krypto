@@ -155,7 +155,7 @@ export class KalkulatorComponent implements OnInit {
   }
 
   kubBitbay(f: NgForm) {
-    this.wynik =[]
+    this.wynik = []
     let ilosc: number = f.value.ilosc;
 
     for (let i = 0; i < this.polkeys.length; i++) {
@@ -171,7 +171,7 @@ export class KalkulatorComponent implements OnInit {
 
         } else if (waluta_waluta[1] == 'BCH') {
           console.log(this.bitbayAsks["BCC"][0]);
-          
+
           this.kupWalute = ilosc / this.bitbayAsks["BCC"][0];
           console.log(this.bitbay[waluta_waluta[1]])
           this.kupWalute -= this.bitbay['BCC'];
@@ -185,6 +185,9 @@ export class KalkulatorComponent implements OnInit {
     }
     let withoutWithdraw: number = ilosc - this.bitbay["BTC"];
     this.wynik.push(["BTC", withoutWithdraw]);
+    this.wynik.sort((a: any, b: any) => {
+      return + b[1] - +a[1];
+    });
     console.log(this.wynik);
 
 
@@ -194,7 +197,7 @@ export class KalkulatorComponent implements OnInit {
 
 
   kupPoloniex(f: NgForm) {
-    this.wynik =[]    
+    this.wynik = []
     let ilosc: number = f.value.ilosc;
 
     for (let i = 0; i < this.polkeys.length; i++) {
@@ -222,6 +225,9 @@ export class KalkulatorComponent implements OnInit {
     }
     let withoutWithdraw: number = ilosc - this.poloniexFee["BTC"]['txFee'];
     this.wynik.push(["BTC", withoutWithdraw]);
+    this.wynik.sort((a: any, b: any) => {
+      return + b[1] - +a[1];
+    });
     console.log(this.wynik);
   }
 

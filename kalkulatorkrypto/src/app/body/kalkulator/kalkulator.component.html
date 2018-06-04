@@ -26,7 +26,7 @@
 
               <label for="sel1">Prześlij z</label>
               <select class="form-control " id="bazowa" ngModel name="bazowa" #bazowa="ngModel">
-                <option value="-1">Wybierz giełdę bazową</option>
+                <option value="">Wybierz giełdę bazową</option>
                 <option value="Poloniex">Poloniex</option>
                 <option value="Bitbay">Bitbay</option>
 
@@ -35,7 +35,7 @@
 
               <label for="sel1">Prześlij do</label>
               <select class="form-control " id="docelowa" ngModel name="docelowa" #docelowa="ngModel">
-                <option value="-1">Wybierz giełdę docelową</option>
+                <option value="">Wybierz giełdę docelową</option>
                 <option value="Poloniex">Poloniex</option>
                 <option value="Bitbay">Bitbay</option>
 
@@ -59,9 +59,9 @@
       <div class="container col-md-4" style="margin-left: 10px">
         <h1 class="display-4" style="text-align: center;"></h1>
         <div class="card-body ">
-          <table >
+          <table>
             <tr>
-              <th class="col-sm" >Waluta</th>
+              <th class="col-sm">Waluta</th>
               <th class="col-sm">Zysk</th>
             </tr>
 
@@ -97,13 +97,14 @@
       </div>
     </ng-container>
 
-  </div>
-</div>
 
-<!-- {{data|json}} -->
-<!-- <ul>
+
+
+
+  <!-- {{data|json}} -->
+  <!-- <ul>
   <li *ngFor="let pol of poloniexFee">{{pol.ABY.txFee|json}}</li>
 </ul> -->
-<!-- {{poloniexFee|json}} -->
+  <!-- {{poloniexFee|json}} -->
 
-<!-- {{polkeys |json}} -->
+  <!-- {{polkeys |json}} -->
