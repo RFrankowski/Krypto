@@ -1,6 +1,6 @@
 .d-flex{
-    width:70%;
-    margin: 100px auto;
+    width: 70%;
+    margin: 80px auto;
     
 }
 .container{
@@ -39,3 +39,4 @@
   .button:hover {
     background-position: 0;
   }
+
