@@ -84,6 +84,9 @@ export class KalkulatorComponent implements OnInit {
     klServ.getPoloniexOrderbook().subscribe(d => {
       this.polkeys = Object.keys(d.json());
       this.polOrderbook = d.json();
+      console.log(d.json());
+
+
 
     })
 
@@ -175,21 +178,48 @@ export class KalkulatorComponent implements OnInit {
 
             } else if (flag) {
               flag = false;
-              suma += ilosc - suma;
               ilosc_krypto += (ilosc - suma) / entry[0];
-              console.log(waluta_waluta[1]);
-              console.log(suma);
-              console.log(ilosc_krypto);
+              suma += ilosc - suma;
+              // console.log(waluta_waluta[1]);
+              // console.log(suma);
+              // console.log(ilosc_krypto);
               this.kupWalute = ilosc_krypto;
               this.kupWalute -= this.bitbay[waluta_waluta[1]];
-            }
 
+            }
 
           }
 
+          // let nowaSuma = 0;
+          // ilosc_krypto = 0;
+          // flag = true;
+          // for (let cena_ilosc of this.polOrderbook[this.polkeys[i]]["bids"]) {
+
+
+          //   if ((nowaSuma + cena_ilosc[1]) < this.kupWalute) {
+          //     console.log("tyle kupilem" + this.kupWalute);
+
+          //     console.log(this.polkeys[i])
+          //     ilosc_krypto += cena_ilosc[0] * cena_ilosc[1];
+          //     nowaSuma += cena_ilosc[1];
+          //     console.log(nowaSuma);
+          //     console.log(ilosc_krypto);
+
+
+
+          //   } else if (flag) {
+          //     flag = false;
+          //     // nowaSuma += this.kupWalute - nowaSuma;
+          //     this.wynik.push([waluta_waluta[1], this.kupWalute])
+
+          //   }
+
+          // }
 
           // this.kupWalute = ilosc / this.bitbayAsks[waluta_waluta[1]][0][0];
           // this.kupWalute -= this.bitbay[waluta_waluta[1]];
+
+
           // this.kupWalute = this.polOrderbook[this.polkeys[i]]["bids"][0][0] * this.kupWalute
           // this.wynik.push([waluta_waluta[1], this.kupWalute])
 
@@ -246,31 +276,22 @@ export class KalkulatorComponent implements OnInit {
     this.wynik.push(["BTC", withoutWithdraw]);
     this.wynik.sort((a: any, b: any) => {
       return + b[1] - +a[1];
-      
+
     });
-    // console.log(this.wynik);
-    // console.log(Math.round(this.wynik[1][1] *10000000)/10000000)
-    // Math.round(this.wynik[0][1]*10000000)/10000000
-    // Math.round(this.wynik[1][1]*10000000)/10000000
-    // Math.round(this.wynik[2][1]*10000000)/10000000
-    // Math.round(this.wynik[3][1]*10000000)/10000000
-    // Math.round(this.wynik[4][1]*10000000)/10000000
-    // Math.round(this.wynik[5][1]*10000000)/10000000
-    // Math.round(this.wynik[6][1]*10000000)/10000000
-    // Math.round(this.wynik[7][1]*10000000)/10000000
+
 
     for (let entry of this.wynik) {
-      entry[1] = Math.round(entry[1] *100000000)/100000000
+      entry[1] = Math.round(entry[1] * 100000000) / 100000000
       // console.log(entry)
-    
+
+    }
+
+
+
   }
-  
 
 
-  }
 
-  
-  
 
 
 
