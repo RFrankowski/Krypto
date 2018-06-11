@@ -62,7 +62,8 @@
           <table>
             <tr>
               <th class="col-sm">Waluta</th>
-              <th class="col-sm">Zysk</th>
+              <th class="col-sm">Otrzymasz</th>
+              <th class = "col-sm"> </th>
             </tr>
 
             <ng-container *ngFor="let wy of wynik">
@@ -71,17 +72,21 @@
                 <ng-container *ngIf="(wy[1]-(1*f.value.ilosc)) >= 0">
                 <td>
                   <font color="green">
-                      {{wy[1]}}
+                    {{wy[1]}} 
                   </font>
                   </td>
               </ng-container>
               <ng-container *ngIf="(wy[1]-(1*f.value.ilosc)) < 0">
                   <td>
                     <font color="red">
-                        {{wy[1]}}
+                       {{wy[1]}} 
                     </font>
                     </td>
+                    
                 </ng-container>
+                <td>
+                  Bitcoin'a
+                </td>
               </tr>
             </ng-container>
 

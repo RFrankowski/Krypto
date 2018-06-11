@@ -188,8 +188,12 @@ export class KalkulatorComponent implements OnInit {
     this.wynik.sort((a: any, b: any) => {
       return + b[1] - +a[1];
     });
-    console.log(this.wynik);
-
+    // console.log(this.wynik);
+    for (let entry of this.wynik) {
+      entry[1] = Math.round(entry[1] *100000000)/100000000
+      // console.log(entry)
+    
+  }
 
   }
 
@@ -227,9 +231,31 @@ export class KalkulatorComponent implements OnInit {
     this.wynik.push(["BTC", withoutWithdraw]);
     this.wynik.sort((a: any, b: any) => {
       return + b[1] - +a[1];
+      
     });
-    console.log(this.wynik);
+    // console.log(this.wynik);
+    // console.log(Math.round(this.wynik[1][1] *10000000)/10000000)
+    // Math.round(this.wynik[0][1]*10000000)/10000000
+    // Math.round(this.wynik[1][1]*10000000)/10000000
+    // Math.round(this.wynik[2][1]*10000000)/10000000
+    // Math.round(this.wynik[3][1]*10000000)/10000000
+    // Math.round(this.wynik[4][1]*10000000)/10000000
+    // Math.round(this.wynik[5][1]*10000000)/10000000
+    // Math.round(this.wynik[6][1]*10000000)/10000000
+    // Math.round(this.wynik[7][1]*10000000)/10000000
+
+    for (let entry of this.wynik) {
+      entry[1] = Math.round(entry[1] *100000000)/100000000
+      // console.log(entry)
+    
   }
+  
+
+
+  }
+
+  
+  
 
 
 
