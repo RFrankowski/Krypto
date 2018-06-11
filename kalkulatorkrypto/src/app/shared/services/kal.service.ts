@@ -25,7 +25,7 @@ export class KalService {
 
   getPoloniexOrderbook(){
 
-    return this.http.get("https://poloniex.com/public?command=returnOrderBook&currencyPair=ALL&depth=1");
+    return this.http.get("https://poloniex.com/public?command=returnOrderBook&currencyPair=ALL");
 
   }
 
