@@ -63,29 +63,29 @@
             <tr>
               <th class="col-sm">Waluta</th>
               <th class="col-sm">Otrzymasz</th>
-              <th class = "col-sm"> </th>
+              <th class="col-sm"> </th>
             </tr>
 
             <ng-container *ngFor="let wy of wynik">
               <tr>
                 <td>{{wy[0]}}</td>
                 <ng-container *ngIf="(wy[1]-(1*f.value.ilosc)) >= 0">
-                <td>
-                  <font color="green">
-                    {{wy[1]}} 
-                  </font>
+                  <td>
+                    <font color="green">
+                      {{wy[1]}}
+                    </font>
                   </td>
-              </ng-container>
-              <ng-container *ngIf="(wy[1]-(1*f.value.ilosc)) < 0">
+                </ng-container>
+                <ng-container *ngIf="(wy[1]-(1*f.value.ilosc)) < 0">
                   <td>
                     <font color="red">
-                       {{wy[1]}} 
+                      {{wy[1]}}
                     </font>
-                    </td>
-                    
+                  </td>
+
                 </ng-container>
                 <td>
-                  Bitcoin'a
+                  BTC
                 </td>
               </tr>
             </ng-container>
@@ -106,10 +106,10 @@
 
 
 
-  <!-- {{data|json}} -->
-  <!-- <ul>
+    <!-- {{data|json}} -->
+    <!-- <ul>
   <li *ngFor="let pol of poloniexFee">{{pol.ABY.txFee|json}}</li>
 </ul> -->
-  <!-- {{poloniexFee|json}} -->
+    <!-- {{poloniexFee|json}} -->
 
-  <!-- {{polkeys |json}} -->
+    <!-- {{polkeys |json}} -->
