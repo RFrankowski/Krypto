@@ -91,7 +91,6 @@ export class KalkulatorComponent implements OnInit {
     })
 
     for (let i = 0; i < this.bitbayKeys.length; i++) {
-
       klServ.getBitbayOrderbook(this.bitbayKeys[i]).subscribe(d => {
         if (this.bitbayKeys[i] != "BTC") {
           this.bitbayBids[this.bitbayKeys[i]] = d.json()['bids'];
@@ -101,8 +100,6 @@ export class KalkulatorComponent implements OnInit {
       })
 
     }
-
-
 
   }
 
@@ -130,20 +127,6 @@ export class KalkulatorComponent implements OnInit {
   }
 
 
-  matchAll(str, regex) {
-    let res = [];
-    let m;
-    if (regex.global) {
-      while (m = regex.exec(str)) {
-        res.push(m[1]);
-      }
-    } else {
-      if (m = regex.exec(str)) {
-        res.push(m[1]);
-      }
-    }
-    return res;
-  }
 
 
   dodajKalk(f: NgForm) {
@@ -169,52 +152,56 @@ export class KalkulatorComponent implements OnInit {
         if (-1 != this.bitbayKeys.indexOf(waluta_waluta[1]) && this.bitbayKeys[i] != "BTC") {
           let suma = 0;
           let ilosc_krypto = 0;
-          let flag = true;
           for (let entry of this.bitbayAsks[waluta_waluta[1]]) {
 
             if ((suma + entry[0] * entry[1]) < ilosc) {
               suma += entry[0] * entry[1];
               ilosc_krypto += entry[1];
 
-            } else if (flag) {
-              flag = false;
+            } else {
               ilosc_krypto += (ilosc - suma) / entry[0];
               suma += ilosc - suma;
-              // console.log(waluta_waluta[1]);
-              // console.log(suma);
-              // console.log(ilosc_krypto);
+              console.log(waluta_waluta[1]);
+              console.log(suma);
+              console.log(ilosc_krypto);
               this.kupWalute = ilosc_krypto;
               this.kupWalute -= this.bitbay[waluta_waluta[1]];
-
+              break;
             }
 
           }
-
-          // let nowaSuma = 0;
-          // ilosc_krypto = 0;
-          // flag = true;
-          // for (let cena_ilosc of this.polOrderbook[this.polkeys[i]]["bids"]) {
-
-
-          //   if ((nowaSuma + cena_ilosc[1]) < this.kupWalute) {
-          //     console.log("tyle kupilem" + this.kupWalute);
-
-          //     console.log(this.polkeys[i])
-          //     ilosc_krypto += cena_ilosc[0] * cena_ilosc[1];
-          //     nowaSuma += cena_ilosc[1];
-          //     console.log(nowaSuma);
-          //     console.log(ilosc_krypto);
+          // to ilosc po przewalutowaniu
+          ilosc_krypto = this.kupWalute;
+          let ilosc_game: number = 0;
+          let ilosc_kupionego_btc: number = 0;
+          for (let cena_ilosc of this.polOrderbook[this.polkeys[i]]["bids"]) {
 
 
+            if ((ilosc_game + cena_ilosc[1]) < this.kupWalute) {
+              ilosc_game += cena_ilosc[1];
+              console.log(waluta_waluta[1] + ": " + ilosc_game);
+              ilosc_kupionego_btc += cena_ilosc[0] * cena_ilosc[1];
+              console.log("BTC: " + ilosc_kupionego_btc);
 
-          //   } else if (flag) {
-          //     flag = false;
-          //     // nowaSuma += this.kupWalute - nowaSuma;
-          //     this.wynik.push([waluta_waluta[1], this.kupWalute])
+            }
+            else if ((ilosc_game + cena_ilosc[1]) > this.kupWalute) {
+              ilosc_kupionego_btc += cena_ilosc[0] * (this.kupWalute - ilosc_game);
+              ilosc_game += this.kupWalute - ilosc_game;
+              console.log(waluta_waluta[1] + ": " + ilosc_game);
+              console.log("BTC: " + ilosc_kupionego_btc);
+              this.wynik.push([waluta_waluta[1], ilosc_kupionego_btc])
 
-          //   }
 
-          // }
+              // ilosc_kupionego_btc += cena_ilosc[0] * (this.kupWalute - ilosc_game[1]);
+              // console.log("tyle kupilem"+ ilosc_kupionego_btc);
+
+              // ilosc_game +=  this.kupWalute - ilosc_game[1];
+              //     // nowaSuma += this.kupWalute - nowaSuma;
+              //     this.wynik.push([waluta_waluta[1], this.kupWalute])
+              break;
+            }
+
+          }
 
           // this.kupWalute = ilosc / this.bitbayAsks[waluta_waluta[1]][0][0];
           // this.kupWalute -= this.bitbay[waluta_waluta[1]];
@@ -239,6 +226,9 @@ export class KalkulatorComponent implements OnInit {
     this.wynik.sort((a: any, b: any) => {
       return + b[1] - +a[1];
     });
+    for (let entry of this.wynik) {
+      entry[1] = Math.round(entry[1] * 100000000) / 100000000;
+    }
 
   }
 
@@ -282,17 +272,9 @@ export class KalkulatorComponent implements OnInit {
 
     for (let entry of this.wynik) {
       entry[1] = Math.round(entry[1] * 100000000) / 100000000
-      // console.log(entry)
-
     }
 
-
-
   }
-
-
-
-
 
 
 
