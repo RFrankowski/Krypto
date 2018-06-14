@@ -4,8 +4,6 @@ import { KalService } from '../../shared/services/kal.service';
 import { HtmlParser } from '@angular/compiler';
 import { NgForm } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-kalkulator',
   templateUrl: './kalkulator.component.html',
@@ -53,8 +51,6 @@ export class KalkulatorComponent implements OnInit {
   }
 
   wynik: any[] = []
-  // bitbay:string[] = ['BTC', ]
-
 
   bitbayKeys: string[] = Object.keys(this.bitbay);
 
@@ -68,51 +64,32 @@ export class KalkulatorComponent implements OnInit {
 
   kupWalute: number;
 
-
-
-
-
   constructor(private klServ: KalService) {
-    // ([aA-zZ]{3,4}:\s[0-9]{0,5}(\.*[0-9]{0,8})
-
-
     klServ.getBitbayFee().subscribe(d => this.bitbayFee = this.parseBitbay(d["_body"]));
 
     klServ.getPoloniexFee().subscribe(d => this.poloniexFee = d.json());
 
-    // pobieram orderbook z poloniex
     klServ.getPoloniexOrderbook().subscribe(d => {
       this.polkeys = Object.keys(d.json());
       this.polOrderbook = d.json();
-      console.log(d.json());
-
-
-
     })
-
     for (let i = 0; i < this.bitbayKeys.length; i++) {
       klServ.getBitbayOrderbook(this.bitbayKeys[i]).subscribe(d => {
         if (this.bitbayKeys[i] != "BTC") {
           this.bitbayBids[this.bitbayKeys[i]] = d.json()['bids'];
           this.bitbayAsks[this.bitbayKeys[i]] = d.json()['asks'];
         }
-
       })
-
     }
-
   }
-
-  polFee() {
-
+  
+  ngOnInit() {
   }
 
   parseBitbay(str) {
     let myRe = /[aA-zZ]{3,4}:\s[0-9]{1,6}(\.*[0-9]{0,8})/g;
     let waluta_fee: string[] = [];
     let myArray: any[];
-
-
     let i = 0;
     while ((myArray = myRe.exec(str)) !== null && i < 11) {
       let msg: string = myArray[0];
@@ -121,74 +98,49 @@ export class KalkulatorComponent implements OnInit {
       }
       i++;
     }
-    // return [ "BTC: 0.00045", "LTC: 0.005"]
     return waluta_fee;
-
   }
 
-
-
-
   dodajKalk(f: NgForm) {
-
     if (f.value.bazowa == "Poloniex") {
       this.kupPoloniex(f);
     } else if (f.value.bazowa == "Bitbay") {
       this.kubBitbay(f);
     }
-
-    // f.resetForm();
   }
 
   kubBitbay(f: NgForm) {
     this.wynik = []
     let ilosc: number = f.value.ilosc;
-
     for (let i = 0; i < this.polkeys.length; i++) {
       if (this.polkeys[i].substr(0, 3) === "BTC") {
-        // this.polOrderbook[this.polkeys[i]]["asks"][0] -- zwraca ["0.00002386", 24.71649195] cene i ilosc
         let waluta_waluta: string[] = this.polkeys[i].split('_');
-
         if (-1 != this.bitbayKeys.indexOf(waluta_waluta[1]) && this.bitbayKeys[i] != "BTC") {
           let suma = 0;
           let ilosc_krypto = 0;
           for (let entry of this.bitbayAsks[waluta_waluta[1]]) {
-
             if ((suma + entry[0] * entry[1]) < ilosc) {
               suma += entry[0] * entry[1];
               ilosc_krypto += entry[1];
-
             } else {
               ilosc_krypto += (ilosc - suma) / entry[0];
               suma += ilosc - suma;
-              // console.log(waluta_waluta[1]);
-              // console.log(suma);
-              // console.log(ilosc_krypto);
               this.kupWalute = ilosc_krypto;
               this.kupWalute -= this.bitbay[waluta_waluta[1]];
               break;
             }
-
           }
-          // to ilosc po przewalutowaniu
           ilosc_krypto = this.kupWalute;
           let ilosc_game: number = 0;
           let ilosc_kupionego_btc: number = 0;
           for (let cena_ilosc of this.polOrderbook[this.polkeys[i]]["bids"]) {
-
-
             if ((ilosc_game + cena_ilosc[1]) < this.kupWalute) {
               ilosc_game += cena_ilosc[1];
-              // console.log(waluta_waluta[1] + ": " + ilosc_game);
               ilosc_kupionego_btc += cena_ilosc[0] * cena_ilosc[1];
-              // console.log("BTC: " + ilosc_kupionego_btc);
-
             }
             else if ((ilosc_game + cena_ilosc[1]) > this.kupWalute) {
               ilosc_kupionego_btc += cena_ilosc[0] * (this.kupWalute - ilosc_game);
               ilosc_game += this.kupWalute - ilosc_game;
-              // console.log(waluta_waluta[1] + ": " + ilosc_game);
-              // console.log("BTC: " + ilosc_kupionego_btc);
               this.wynik.push([waluta_waluta[1], ilosc_kupionego_btc])
               break;
             }
@@ -204,25 +156,18 @@ export class KalkulatorComponent implements OnInit {
     for (let entry of this.wynik) {
       entry[1] = Math.round(entry[1] * 100000000) / 100000000;
     }
-
   }
-
-
 
   kupPoloniex(f: NgForm) {
     this.wynik = []
     let ilosc: number = f.value.ilosc;
-
     for (let i = 0; i < this.polkeys.length; i++) {
       if (this.polkeys[i].substr(0, 3) === "BTC") {
-        // this.polOrderbook[this.polkeys[i]]["asks"][0] -- zwraca ["0.00002386", 24.71649195] cene i ilosc
         let waluta_waluta: string[] = this.polkeys[i].split('_');
-
         if (-1 != this.bitbayKeys.indexOf(waluta_waluta[1]) && this.bitbayKeys[i] != "BTC") {
           let suma = 0;
           let ilosc_krypto = 0;
           for (let entry of this.polOrderbook[this.polkeys[i]]["asks"]) {
-
             if ((suma + entry[0] * entry[1]) < ilosc) {
               suma += entry[0] * entry[1];
               ilosc_krypto += entry[1];
@@ -230,34 +175,22 @@ export class KalkulatorComponent implements OnInit {
             } else {
               ilosc_krypto += (ilosc - suma) / entry[0];
               suma += ilosc - suma;
-              // console.log(waluta_waluta[1]);
-              // console.log(suma);
-              // console.log(ilosc_krypto);
               this.kupWalute = ilosc_krypto;
               this.kupWalute -= this.poloniexFee[waluta_waluta[1]]['txFee'];
               break;
             }
-
           }
-          // to ilosc po przewalutowaniu
           ilosc_krypto = this.kupWalute;
           let ilosc_game: number = 0;
           let ilosc_kupionego_btc: number = 0;
           for (let cena_ilosc of this.bitbayBids[waluta_waluta[1]]) {
-
-
             if ((ilosc_game + cena_ilosc[1]) < this.kupWalute) {
               ilosc_game += cena_ilosc[1];
-              // console.log(waluta_waluta[1] + ": " + ilosc_game);
               ilosc_kupionego_btc += cena_ilosc[0] * cena_ilosc[1];
-              // console.log("BTC: " + ilosc_kupionego_btc);
-
             }
             else if ((ilosc_game + cena_ilosc[1]) > this.kupWalute) {
               ilosc_kupionego_btc += cena_ilosc[0] * (this.kupWalute - ilosc_game);
               ilosc_game += this.kupWalute - ilosc_game;
-              // console.log(waluta_waluta[1] + ": " + ilosc_game);
-              // console.log("BTC: " + ilosc_kupionego_btc);
               this.wynik.push([waluta_waluta[1], ilosc_kupionego_btc])
               break;
             }
@@ -273,56 +206,9 @@ export class KalkulatorComponent implements OnInit {
     for (let entry of this.wynik) {
       entry[1] = Math.round(entry[1] * 100000000) / 100000000;
     }
-
   }
 
 
-  // kupPoloniex(f: NgForm) {
-  //   this.wynik = []
-  //   let ilosc: number = f.value.ilosc;
 
-  //   for (let i = 0; i < this.polkeys.length; i++) {
-  //     if (this.polkeys[i].substr(0, 3) === "BTC") {
-  //       // this.polOrderbook[this.polkeys[i]]["asks"][0] -- zwraca ["0.00002386", 24.71649195] cene i ilosc
-  //       let waluta_waluta: string[] = this.polkeys[i].split('_');
-
-  //       if (-1 != this.bitbayKeys.indexOf(waluta_waluta[1]) && this.bitbayKeys[i] != "BTC") {
-
-  //         this.kupWalute = ilosc / this.polOrderbook[this.polkeys[i]]["asks"][0][0];
-  //         this.kupWalute -= this.poloniexFee[waluta_waluta[1]]['txFee'];
-
-  //         this.kupWalute = this.bitbayBids[waluta_waluta[1]][0] * this.kupWalute
-  //         this.wynik.push([waluta_waluta[1], this.kupWalute])
-  //       } else if (waluta_waluta[1] == 'BCH') {
-
-  //         this.kupWalute = ilosc / this.polOrderbook[this.polkeys[i]]["asks"][0][0];
-  //         this.kupWalute -= this.poloniexFee[waluta_waluta[1]]['txFee'];
-  //         this.kupWalute = this.bitbayBids["BCC"][0] * this.kupWalute;
-  //         this.wynik.push([waluta_waluta[1], this.kupWalute]);
-
-  //       }
-
-  //     }
-  //   }
-  //   let withoutWithdraw: number = ilosc - this.poloniexFee["BTC"]['txFee'];
-  //   this.wynik.push(["BTC", withoutWithdraw]);
-  //   this.wynik.sort((a: any, b: any) => {
-  //     return + b[1] - +a[1];
-
-  //   });
-
-
-  //   for (let entry of this.wynik) {
-  //     entry[1] = Math.round(entry[1] * 100000000) / 100000000
-  //   }
-
-  // }
-
-
-
-
-
-  ngOnInit() {
-  }
 
 }
